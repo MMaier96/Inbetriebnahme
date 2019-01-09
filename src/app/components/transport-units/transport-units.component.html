@@ -1,0 +1,3 @@
+<div *ngFor="let unit of transportUnits">
+  {{ unit.id }}: {{ unit.location.name }} <span *ngIf="unit.target != null">to {{ unit.target }}</span>
+</div>
