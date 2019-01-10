@@ -10,18 +10,31 @@ import { MaterialModules } from './material.modules';
 
 /* Import BrowserAnimations */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { TransportUnitsComponent } from './components/transport-units/transport-units.component';
+
+/* Imports for HTTP calls */
+import { HttpClientModule } from '@angular/common/http';
+
+/* Services */
+import { TransportUnitService } from './services/transport-unit.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashboardComponent,
+    TransportUnitsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MaterialModules,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    TransportUnitService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
