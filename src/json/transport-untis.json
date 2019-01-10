@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "name": "TestTU_0001",
+    "location": "HRA101X111Y122Z21"
+  },
+  {
+    "id": 2,
+    "name": "TestTU_0002",
+    "location": "HRA101X111Y122Z21"
+  },
+  {
+    "id": 3,
+    "name": "TestTU_0003",
+    "location": "HRA101X111Y122Z21"
+  },
+  {
+    "id": 4,
+    "name": "TestTU_0004",
+    "location": "HRA101X111Y122Z21"
+  }
+]
+
+https://api.myjson.com/bins/j4zig
