@@ -1,0 +1,9 @@
+<table mat-table [dataSource]="_tableTemplateService.getElements()" class="mat-elevation-z8">
+    <ng-container *ngFor="let column of _tableTemplateService.getDisplayedColumns()" matColumnDef="{{column}}">
+      <th mat-header-cell *matHeaderCellDef> {{ column | uppercase}} </th>
+      <td mat-cell *matCellDef="let element"> {{ element[column] }} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="_tableTemplateService.getDisplayedColumns()"></tr>
+    <tr mat-row *matRowDef="let row; columns: _tableTemplateService.getDisplayedColumns()"></tr>
+</table>
