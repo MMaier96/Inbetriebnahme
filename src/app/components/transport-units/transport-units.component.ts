@@ -1,3 +1,4 @@
+import { TableTemplateService } from './../../services/template-services/table.service';
 import { TransportUnit } from './../../objects/TransportUnit';
 import { TransportUnitService } from './../../services/transport-unit.service';
 import { Component, OnInit } from '@angular/core';
@@ -9,17 +10,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TransportUnitsComponent implements OnInit {
 
-  transportUnits: TransportUnit[];
+  displayedColumns: String[] = ['id', 'name'];
+  elements: TransportUnit[];
 
-  constructor(private _transportUnits: TransportUnitService) { }
+  constructor(
+    private _transportUnits: TransportUnitService,
+    private _tableTemplateService: TableTemplateService
+    ) { }
 
   ngOnInit() {
     this.loadAllTransportUnits();
+    this.setDisplayedColumns();
   }
 
   loadAllTransportUnits(): void {
     this._transportUnits.getAllTransportUnits()
-      .subscribe( data => this.transportUnits = data);
+      .subscribe( data => this._tableTemplateService.setElements(data));
+  }
+
+  setDisplayedColumns() {
+    this._tableTemplateService.setDisplayedColumns(this.displayedColumns);
   }
 
 }
