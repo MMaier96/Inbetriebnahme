@@ -4,18 +4,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: DashboardComponent
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent
-  },
-  {
-    path: 'transport-units',
-    component: TransportUnitsComponent
-  }
+  {    path: '',                    component: DashboardComponent },
+  {    path: 'dashboard',           component: DashboardComponent },
+  {    path: 'transport-units',     component: TransportUnitsComponent }
 ];
 
 @NgModule({
