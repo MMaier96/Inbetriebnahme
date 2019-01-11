@@ -1,9 +1,9 @@
-import { AppTitleService } from './../../services/app-title.service';
-import { TableTemplateService } from './../../services/template-services/table.service';
+import { AppTitleService } from '../../services/app-title.service';
+import { ACXTableService } from '../../services/acx-services/acx-table.service';
 import { TransportUnit } from './../../objects/TransportUnit';
 import { TransportUnitService } from './../../services/transport-unit.service';
 import { Component, OnInit } from '@angular/core';
-import { PaginatorTemplateService } from 'src/app/services/template-services/paginator.service';
+import { ACXPaginatorService } from 'src/app/services/acx-services/acx-paginator.service';
 
 @Component({
   selector: 'app-transport-units',
@@ -21,13 +21,13 @@ export class TransportUnitsComponent implements OnInit {
 
   constructor(
     private _transportUnits: TransportUnitService,
-    private _tableTemplateService: TableTemplateService,
-    private _paginatorTemplateService: PaginatorTemplateService,
-    private _appTitleService: AppTitleService
+    private _acxTableTemplateService: ACXTableService,
+    private _acxPaginatorTemplateService: ACXPaginatorService,
+    private _acxAppTitleService: AppTitleService
     ) { }
 
   ngOnInit() {
-    this._appTitleService.setAppTitle('TransportUnit');
+    this._acxAppTitleService.setAppTitle('TransportUnit');
     this.loadAllTransportUnits();
     this.setDisplayedColumns();
   }
@@ -35,16 +35,16 @@ export class TransportUnitsComponent implements OnInit {
   loadAllTransportUnits(): void {
     this._transportUnits.getAllTransportUnits()
       .subscribe( data => {
-        this._tableTemplateService.setElements(data);
-        this._tableTemplateService.setPaginatorService(this._paginatorTemplateService);
-        this._paginatorTemplateService.setPageSizes(this.possibleSizes);
-        this._paginatorTemplateService.setPageSize(this.initialSize);
-        this._paginatorTemplateService.setLength(data.length);
+        this._acxTableTemplateService.setElements(data);
+        this._acxTableTemplateService.setPaginatorService(this._acxPaginatorTemplateService);
+        this._acxPaginatorTemplateService.setPageSizes(this.possibleSizes);
+        this._acxPaginatorTemplateService.setPageSize(this.initialSize);
+        this._acxPaginatorTemplateService.setLength(data.length);
       });
   }
 
   setDisplayedColumns() {
-    this._tableTemplateService.setDisplayedColumns(this.displayedColumns);
+    this._acxTableTemplateService.setDisplayedColumns(this.displayedColumns);
   }
 
 }

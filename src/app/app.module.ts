@@ -10,37 +10,38 @@ import { MaterialModules } from './material.modules';
 /* Import BrowserAnimations */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+/* Imports for HTTP calls */
+import { HttpClientModule } from '@angular/common/http';
+
 /* Components */
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TransportUnitsComponent } from './components/transport-units/transport-units.component';
 
-/* Template Components */
-import { TableComponent } from './components/templates/table/table.component';
-import { PaginatorComponent } from './components/templates/paginator/paginator.component';
+/* ACX Template Components */
+import { ACXTableComponent } from './components/acx-components/acx-table/acx-table.component';
+import { ACXPaginatorComponent } from './components/acx-components/acx-paginator/acx-paginator.component';
 
-/* Imports for HTTP calls */
-import { HttpClientModule } from '@angular/common/http';
 
 /* Services */
 import { TransportUnitService } from './services/transport-unit.service';
 import { AppTitleService } from './services/app-title.service';
 
-/* Template Services */
-import { TableTemplateService } from './services/template-services/table.service';
-import { PaginatorTemplateService } from './services/template-services/paginator.service';
+/* ACX Template Services */
+import { ACXTableService } from './services/acx-services/acx-table.service';
+import { ACXPaginatorService } from './services/acx-services/acx-paginator.service';
 
-/* Pipes */
-import { TablePipe } from './pipes/template-pipes/table.pipe';
+/* ACX Pipes */
+import { ACXTablePipe } from './pipes/acx-pipes/acx-table.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     TransportUnitsComponent,
-    TableComponent,
-    PaginatorComponent,
-    TablePipe
+    ACXTableComponent,
+    ACXPaginatorComponent,
+    ACXTablePipe
   ],
   imports: [
     BrowserModule,
@@ -50,9 +51,9 @@ import { TablePipe } from './pipes/template-pipes/table.pipe';
     HttpClientModule
   ],
   providers: [
-    TableTemplateService,
+    ACXTableService,
     TransportUnitService,
-    PaginatorTemplateService,
+    ACXPaginatorService,
     AppTitleService
   ],
   bootstrap: [AppComponent]

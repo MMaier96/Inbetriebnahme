@@ -9,11 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class DashboardComponent implements OnInit {
 
   constructor(
-    private _appTitleService: AppTitleService
+    private _acxAppTitleService: AppTitleService
   ) { }
 
   ngOnInit() {
-    this._appTitleService.setAppTitle('Dashboard');
+    this._acxAppTitleService.setAppTitle('Dashboard');
   }
 
 }

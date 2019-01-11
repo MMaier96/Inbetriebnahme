@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'tableFiltering'
+  name: 'acxTableFiltering'
 })
-export class TablePipe implements PipeTransform {
+export class ACXTablePipe implements PipeTransform {
 
   transform(tableData: any[], page: number, size: number): any[] {
     if (page === undefined) {
