@@ -1,3 +1,4 @@
+import { AppTitleService } from './../../services/app-title.service';
 import { TableTemplateService } from './../../services/template-services/table.service';
 import { TransportUnit } from './../../objects/TransportUnit';
 import { TransportUnitService } from './../../services/transport-unit.service';
@@ -21,10 +22,12 @@ export class TransportUnitsComponent implements OnInit {
   constructor(
     private _transportUnits: TransportUnitService,
     private _tableTemplateService: TableTemplateService,
-    private _paginatorTemplateService: PaginatorTemplateService
+    private _paginatorTemplateService: PaginatorTemplateService,
+    private _appTitleService: AppTitleService
     ) { }
 
   ngOnInit() {
+    this._appTitleService.setAppTitle('TransportUnit');
     this.loadAllTransportUnits();
     this.setDisplayedColumns();
   }
