@@ -1,3 +1,4 @@
+import { AppTitleService } from './../../services/app-title.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _appTitleService: AppTitleService
+  ) { }
 
   ngOnInit() {
+    this._appTitleService.setAppTitle('Dashboard');
   }
 
 }
