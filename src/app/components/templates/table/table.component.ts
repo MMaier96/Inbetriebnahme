@@ -1,5 +1,6 @@
+import { PaginatorTemplateService } from './../../../services/template-services/paginator.service';
 import { TableTemplateService } from './../../../services/template-services/table.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-table',
@@ -7,6 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent {
+  change = this._paginatorService.getIndex();
 
-  constructor(public _tableTemplateService: TableTemplateService) { }
+  constructor(
+    public _tableTemplateService: TableTemplateService,
+    public _paginatorService: PaginatorTemplateService) { }
+
+
+
 }

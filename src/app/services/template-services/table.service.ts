@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
+import { PaginatorTemplateService } from './paginator.service';
 
 @Injectable()
 export class TableTemplateService {
 
   displayedColumns: String[];
   elements: any[];
+  paginatorService: PaginatorTemplateService;
 
   constructor( ) { }
 
@@ -12,7 +14,7 @@ export class TableTemplateService {
     return this.displayedColumns;
   }
 
-  setDisplayedColumns(displayedElements): void {
+  setDisplayedColumns(displayedElements: String[]): void {
     this.displayedColumns = displayedElements;
   }
 
@@ -20,7 +22,15 @@ export class TableTemplateService {
     return this.elements;
   }
 
-  setElements(elements): void {
+  setElements(elements: any): void {
     this.elements = elements;
+  }
+
+  setPaginatorService(service: PaginatorTemplateService): void {
+    this.paginatorService = service;
+  }
+
+  getPaginatorService(): PaginatorTemplateService {
+    return this.paginatorService;
   }
 }
