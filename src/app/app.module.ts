@@ -28,6 +28,8 @@ import { TransportUnitService } from './services/transport-unit.service';
 /* Template Services */
 import { TableTemplateService } from './services/template-services/table.service';
 import { PaginatorTemplateService } from './services/template-services/paginator.service';
+
+/* Pipes */
 import { TablePipe } from './pipes/template-pipes/table.pipe';
 
 @NgModule({
