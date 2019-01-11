@@ -15,7 +15,7 @@ export class TransportUnitsComponent implements OnInit {
   initialSize: number = this.possibleSizes[0];
 
   /* settings for table template */
-  displayedColumns: String[] = ['id', 'name'];
+  displayedColumns: String[] = ['id', 'name', 'location'];
   elements: TransportUnit[];
 
   constructor(

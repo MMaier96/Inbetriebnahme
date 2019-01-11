@@ -11,8 +11,6 @@ export class TablePipe implements PipeTransform {
     }
     const startIndex = page * size ;
     const endIndex = startIndex + size;
-    console.log(startIndex);
-    console.log(endIndex);
     return tableData.slice(startIndex, endIndex);
   }
 
