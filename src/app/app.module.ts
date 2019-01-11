@@ -24,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 /* Services */
 import { TransportUnitService } from './services/transport-unit.service';
+import { AppTitleService } from './services/app-title.service';
 
 /* Template Services */
 import { TableTemplateService } from './services/template-services/table.service';
@@ -51,7 +52,8 @@ import { TablePipe } from './pipes/template-pipes/table.pipe';
   providers: [
     TableTemplateService,
     TransportUnitService,
-    PaginatorTemplateService
+    PaginatorTemplateService,
+    AppTitleService
   ],
   bootstrap: [AppComponent]
 })
