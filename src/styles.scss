@@ -2,3 +2,10 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 /* GLOBAL STYLES */
+img.icon {
+  width: 25px;
+  padding-right: 10px;
+}
+a[mat-list-item]{
+  margin-right: 10px;
+}
