@@ -17,6 +17,7 @@ import { TransportUnitsComponent } from './components/transport-units/transport-
 
 /* Template Components */
 import { TableComponent } from './components/templates/table/table.component';
+import { PaginatorComponent } from './components/templates/paginator/paginator.component';
 
 /* Imports for HTTP calls */
 import { HttpClientModule } from '@angular/common/http';
@@ -26,13 +27,17 @@ import { TransportUnitService } from './services/transport-unit.service';
 
 /* Template Services */
 import { TableTemplateService } from './services/template-services/table.service';
+import { PaginatorTemplateService } from './services/template-services/paginator.service';
+import { TablePipe } from './pipes/template-pipes/table.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     TransportUnitsComponent,
-    TableComponent
+    TableComponent,
+    PaginatorComponent,
+    TablePipe
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,8 @@ import { TableTemplateService } from './services/template-services/table.service
   ],
   providers: [
     TableTemplateService,
-    TransportUnitService
+    TransportUnitService,
+    PaginatorTemplateService
   ],
   bootstrap: [AppComponent]
 })
