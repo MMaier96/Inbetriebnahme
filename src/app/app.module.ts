@@ -33,6 +33,8 @@ import { WamasPaginatorService } from './services/wamas-services/wamas-paginator
 
 /* Wamas Pipes */
 import { WamasTablePipe } from './pipes/wamas-pipes/wamas-table.pipe';
+import { WamasButtonComponent } from './components/wamas-components/wamas-button/wamas-button.component';
+import { WamasTableCellComponent } from './components/wamas-components/wamas-table-cell/wamas-table-cell.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { WamasTablePipe } from './pipes/wamas-pipes/wamas-table.pipe';
     TransportUnitsComponent,
     WamasTableComponent,
     WamasPaginatorComponent,
-    WamasTablePipe
+    WamasTablePipe,
+    WamasButtonComponent,
+    WamasTableCellComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +53,9 @@ import { WamasTablePipe } from './pipes/wamas-pipes/wamas-table.pipe';
     MaterialModules,
     BrowserAnimationsModule,
     HttpClientModule
+  ],
+  entryComponents: [
+    WamasButtonComponent
   ],
   providers: [
     WamasTableService,

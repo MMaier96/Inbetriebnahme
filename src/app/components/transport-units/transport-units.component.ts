@@ -18,6 +18,7 @@ export class TransportUnitsComponent implements OnInit {
   /* settings for table template */
   displayedColumns: String[] = ['id', 'name', 'location'];
   elements: TransportUnit[];
+  tableData;
 
   constructor(
     private _transportUnits: TransportUnitService,
@@ -35,6 +36,7 @@ export class TransportUnitsComponent implements OnInit {
   loadAllTransportUnits(): void {
     this._transportUnits.getAllTransportUnits()
       .subscribe( data => {
+        this.tableData = data;
         this._wamasTableTemplateService.setElements(data);
         this._wamasTableTemplateService.setPaginatorService(this._wamasPaginatorTemplateService);
         this._wamasPaginatorTemplateService.setPageSizes(this.possibleSizes);
