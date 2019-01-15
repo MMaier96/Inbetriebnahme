@@ -9,11 +9,9 @@ import { Component } from '@angular/core';
 })
 export class WamasTableComponent {
   change = this._wamasPaginatorService.getIndex();
-
+  test = '<test>test</test>';
   constructor(
     public _wamasTableService: WamasTableService,
-    public _wamasPaginatorService: WamasPaginatorService) { }
-
-
-
+    public _wamasPaginatorService: WamasPaginatorService
+  ) { }
 }

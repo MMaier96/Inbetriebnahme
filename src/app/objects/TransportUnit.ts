@@ -1,5 +1,5 @@
 export interface TransportUnit {
-  id: Number;
-  name: String;
-  location: String;
+  name: string;
+  location: string;
+  activeTransportOrder: string;
 }

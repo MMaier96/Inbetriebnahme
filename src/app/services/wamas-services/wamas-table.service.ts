@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { WamasPaginatorService } from './wamas-paginator.service';
+import { Drawable } from 'src/app/objects/drawable/Drawable';
 
 @Injectable()
 export class WamasTableService {
 
   displayedColumns: String[];
-  elements: any[];
+  elements: Drawable[];
   _wamasPaginatorService: WamasPaginatorService;
 
   constructor( ) { }
@@ -18,11 +19,11 @@ export class WamasTableService {
     this.displayedColumns = displayedElements;
   }
 
-  getElements(): any[] {
+  getElements(): Drawable[] {
     return this.elements;
   }
 
-  setElements(elements: any): void {
+  setElements(elements: Drawable[]): void {
     this.elements = elements;
   }
 

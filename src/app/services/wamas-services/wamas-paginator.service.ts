@@ -32,6 +32,7 @@ export class WamasPaginatorService {
 
   setPageSizes(sizes: number[]) {
     this.pageSizes = sizes;
+    this.pageSize = sizes[0];
   }
 
   getIndex(): number {
