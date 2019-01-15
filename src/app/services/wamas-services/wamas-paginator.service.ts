@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class ACXPaginatorService {
+export class WamasPaginatorService {
 
   length: number;
   pageSize: number;

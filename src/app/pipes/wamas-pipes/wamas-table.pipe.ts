@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'acxTableFiltering'
+  name: 'wamasTableFiltering'
 })
-export class ACXTablePipe implements PipeTransform {
+export class WamasTablePipe implements PipeTransform {
 
   transform(tableData: any[], page: number, size: number): any[] {
     if (page === undefined) {

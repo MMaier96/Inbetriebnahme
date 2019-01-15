@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ACXPaginatorService } from './acx-paginator.service';
+import { WamasPaginatorService } from './wamas-paginator.service';
 
 @Injectable()
-export class ACXTableService {
+export class WamasTableService {
 
   displayedColumns: String[];
   elements: any[];
-  _acxPaginatorTemplateService: ACXPaginatorService;
+  _wamasPaginatorService: WamasPaginatorService;
 
   constructor( ) { }
 
@@ -26,11 +26,11 @@ export class ACXTableService {
     this.elements = elements;
   }
 
-  setPaginatorService(service: ACXPaginatorService): void {
-    this._acxPaginatorTemplateService = service;
+  setPaginatorService(service: WamasPaginatorService): void {
+    this._wamasPaginatorService = service;
   }
 
-  getPaginatorService(): ACXPaginatorService {
-    return this._acxPaginatorTemplateService;
+  getPaginatorService(): WamasPaginatorService {
+    return this._wamasPaginatorService;
   }
 }
