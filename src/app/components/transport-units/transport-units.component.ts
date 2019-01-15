@@ -1,9 +1,9 @@
 import { AppTitleService } from '../../services/app-title.service';
-import { ACXTableService } from '../../services/acx-services/acx-table.service';
+import { WamasTableService } from '../../services/wamas-services/wamas-table.service';
 import { TransportUnit } from './../../objects/TransportUnit';
 import { TransportUnitService } from './../../services/transport-unit.service';
 import { Component, OnInit } from '@angular/core';
-import { ACXPaginatorService } from 'src/app/services/acx-services/acx-paginator.service';
+import { WamasPaginatorService } from 'src/app/services/wamas-services/wamas-paginator.service';
 
 @Component({
   selector: 'app-transport-units',
@@ -21,13 +21,13 @@ export class TransportUnitsComponent implements OnInit {
 
   constructor(
     private _transportUnits: TransportUnitService,
-    private _acxTableTemplateService: ACXTableService,
-    private _acxPaginatorTemplateService: ACXPaginatorService,
-    private _acxAppTitleService: AppTitleService
+    private _wamasTableTemplateService: WamasTableService,
+    private _wamasPaginatorTemplateService: WamasPaginatorService,
+    private _appTitleService: AppTitleService
     ) { }
 
   ngOnInit() {
-    this._acxAppTitleService.setAppTitle('TransportUnit');
+    this._appTitleService.setAppTitle('TransportUnit');
     this.loadAllTransportUnits();
     this.setDisplayedColumns();
   }
@@ -35,16 +35,16 @@ export class TransportUnitsComponent implements OnInit {
   loadAllTransportUnits(): void {
     this._transportUnits.getAllTransportUnits()
       .subscribe( data => {
-        this._acxTableTemplateService.setElements(data);
-        this._acxTableTemplateService.setPaginatorService(this._acxPaginatorTemplateService);
-        this._acxPaginatorTemplateService.setPageSizes(this.possibleSizes);
-        this._acxPaginatorTemplateService.setPageSize(this.initialSize);
-        this._acxPaginatorTemplateService.setLength(data.length);
+        this._wamasTableTemplateService.setElements(data);
+        this._wamasTableTemplateService.setPaginatorService(this._wamasPaginatorTemplateService);
+        this._wamasPaginatorTemplateService.setPageSizes(this.possibleSizes);
+        this._wamasPaginatorTemplateService.setPageSize(this.initialSize);
+        this._wamasPaginatorTemplateService.setLength(data.length);
       });
   }
 
   setDisplayedColumns() {
-    this._acxTableTemplateService.setDisplayedColumns(this.displayedColumns);
+    this._wamasTableTemplateService.setDisplayedColumns(this.displayedColumns);
   }
 
 }

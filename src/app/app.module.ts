@@ -18,30 +18,30 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TransportUnitsComponent } from './components/transport-units/transport-units.component';
 
-/* ACX Template Components */
-import { ACXTableComponent } from './components/acx-components/acx-table/acx-table.component';
-import { ACXPaginatorComponent } from './components/acx-components/acx-paginator/acx-paginator.component';
+/* Wamas Template Components */
+import { WamasTableComponent } from './components/wamas-components/wamas-table/wamas-table.component';
+import { WamasPaginatorComponent } from './components/wamas-components/wamas-paginator/wamas-paginator.component';
 
 
 /* Services */
 import { TransportUnitService } from './services/transport-unit.service';
 import { AppTitleService } from './services/app-title.service';
 
-/* ACX Template Services */
-import { ACXTableService } from './services/acx-services/acx-table.service';
-import { ACXPaginatorService } from './services/acx-services/acx-paginator.service';
+/* Wamas Template Services */
+import { WamasTableService } from './services/wamas-services/wamas-table.service';
+import { WamasPaginatorService } from './services/wamas-services/wamas-paginator.service';
 
-/* ACX Pipes */
-import { ACXTablePipe } from './pipes/acx-pipes/acx-table.pipe';
+/* Wamas Pipes */
+import { WamasTablePipe } from './pipes/wamas-pipes/wamas-table.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     TransportUnitsComponent,
-    ACXTableComponent,
-    ACXPaginatorComponent,
-    ACXTablePipe
+    WamasTableComponent,
+    WamasPaginatorComponent,
+    WamasTablePipe
   ],
   imports: [
     BrowserModule,
@@ -51,9 +51,9 @@ import { ACXTablePipe } from './pipes/acx-pipes/acx-table.pipe';
     HttpClientModule
   ],
   providers: [
-    ACXTableService,
+    WamasTableService,
     TransportUnitService,
-    ACXPaginatorService,
+    WamasPaginatorService,
     AppTitleService
   ],
   bootstrap: [AppComponent]
