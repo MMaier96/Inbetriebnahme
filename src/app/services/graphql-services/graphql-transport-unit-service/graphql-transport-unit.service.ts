@@ -1,21 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TransportUnit } from '../objects/TransportUnit';
+import { GraphQLTransportUnit } from '../../../objects/graphql-objects/graphql-transport-unit';
 
 /* Static for now -> TODO: make dynamic in the future */
 const apiUrl = 'https://api.myjson.com/bins/mu3y8';
 
 @Injectable()
-export class TransportUnitService {
+export class GraphQLTransportUnitService {
 
   /* Inject the HTTP Client */
   constructor( private http: HttpClient) { }
 
   /* Query for all available TransportUnits */
-  getAllTransportUnits(): Observable<TransportUnit[]> {
-    return this.http.get<TransportUnit[]>(apiUrl);
+  getAllTransportUnits(): Observable<GraphQLTransportUnit[]> {
+    return this.http.get<GraphQLTransportUnit[]>(apiUrl);
   }
-
-  /* Provide more TransportUnits provider */
 }

@@ -13,5 +13,4 @@ export class WamasTablePipe implements PipeTransform {
     const endIndex = startIndex + size;
     return tableData.slice(startIndex, endIndex);
   }
-
 }

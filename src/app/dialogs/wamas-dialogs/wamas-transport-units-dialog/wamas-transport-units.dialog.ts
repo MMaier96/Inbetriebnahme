@@ -1,30 +1,32 @@
-import { AppTitleService } from '../../services/app-title.service';
-import { WamasTableService } from '../../services/wamas-services/wamas-table.service';
-import { TransportUnit } from './../../objects/TransportUnit';
-import { TransportUnitService } from './../../services/transport-unit.service';
+import { WamasTableService } from './../../../services/wamas-services/wamas-table-service/wamas-table.service';
+import { GraphQLTransportUnitService } from './../../../services/graphql-services/graphql-transport-unit-service/graphql-transport-unit.service';
+import { GraphQLTransportUnit } from './../../../objects/graphql-objects/graphql-transport-unit';
+import { WamasAppTitleService } from './../../../services/wamas-services/wamas-app-title-service/wamas-app-title.service';
+import { WamasPaginatorService } from 'src/app/services/wamas-services/wamas-paginator-service/wamas-paginator.service';
+
 import { Component, OnInit } from '@angular/core';
-import { WamasPaginatorService } from 'src/app/services/wamas-services/wamas-paginator.service';
+
 
 @Component({
-  selector: 'app-transport-units',
-  templateUrl: './transport-units.component.html',
-  styleUrls: ['./transport-units.component.scss']
+  selector: 'wamas-transport-units-dialog',
+  templateUrl: './wamas-transport-units.dialog.html',
+  styleUrls: ['./wamas-transport-units.dialog.scss']
 })
-export class TransportUnitsComponent implements OnInit {
+export class WamasTransportUnitsDialog implements OnInit {
   /* settings for paginator template */
   possibleSizes: number[] = [10, 25, 50, 100];
   initialSize: number = this.possibleSizes[0];
 
   /* settings for table template */
   displayedColumns: String[] = ['id', 'name', 'location'];
-  elements: TransportUnit[];
+  elements: GraphQLTransportUnit[];
   tableData;
 
   constructor(
-    private _transportUnits: TransportUnitService,
+    private _transportUnits: GraphQLTransportUnitService,
     private _wamasTableTemplateService: WamasTableService,
     private _wamasPaginatorTemplateService: WamasPaginatorService,
-    private _appTitleService: AppTitleService
+    private _appTitleService: WamasAppTitleService
     ) { }
 
   ngOnInit() {
@@ -48,5 +50,4 @@ export class TransportUnitsComponent implements OnInit {
   setDisplayedColumns() {
     this._wamasTableTemplateService.setDisplayedColumns(this.displayedColumns);
   }
-
 }

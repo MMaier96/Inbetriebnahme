@@ -1,9 +1,10 @@
-import { WamasButtonComponent } from './../wamas-button/wamas-button.component';
+import { WamasButtonComponent } from './../wamas-button-component/wamas-button.component';
+
 import { ComponentRef, ComponentFactoryResolver, Component, Input, ViewChild, ViewContainerRef,
   Compiler, ChangeDetectorRef, OnChanges, OnDestroy, AfterViewInit } from '@angular/core';
 
 @Component({
-  selector: 'app-wamas-table-cell',
+  selector: 'wamas-table-cell',
   templateUrl: './wamas-table-cell.component.html',
   styleUrls: ['./wamas-table-cell.component.scss']
 })

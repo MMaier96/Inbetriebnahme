@@ -1,11 +1,13 @@
-import { WamasPaginatorService } from '../../../services/wamas-services/wamas-paginator.service';
-import { WamasTableService } from '../../../services/wamas-services/wamas-table.service';
+import { WamasButtonComponent } from './../wamas-button-component/wamas-button.component';
+import { WamasTableService } from 'src/app/services/wamas-services/wamas-table-service/wamas-table.service';
+import { WamasPaginatorService } from 'src/app/services/wamas-services/wamas-paginator-service/wamas-paginator.service';
+
 import { Component, Input, OnInit, OnDestroy, ViewChild, ViewContainerRef, Compiler, ChangeDetectorRef,
   ComponentFactoryResolver, ComponentRef, OnChanges, AfterViewInit } from '@angular/core';
-import { WamasButtonComponent } from '../wamas-button/wamas-button.component';
+
 
 @Component({
-  selector: 'app-wamas-table',
+  selector: 'wamas-table',
   templateUrl: './wamas-table.component.html',
   styleUrls: ['./wamas-table.component.scss']
 })

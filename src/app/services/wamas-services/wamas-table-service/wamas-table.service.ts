@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { WamasPaginatorService } from './wamas-paginator.service';
+import { WamasPaginatorService } from '../wamas-paginator-service/wamas-paginator.service';
 
 @Injectable()
 export class WamasTableService {

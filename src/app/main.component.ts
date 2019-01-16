@@ -1,14 +1,14 @@
-import { AppTitleService } from './services/app-title.service';
+import { WamasAppTitleService } from './services/wamas-services/wamas-app-title-service/wamas-app-title.service';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.scss']
 })
-export class AppComponent implements OnDestroy {
+export class MainComponent implements OnDestroy {
    /* Settings for general APP */
    appTitle: String;
 
@@ -19,7 +19,7 @@ export class AppComponent implements OnDestroy {
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
-    public _appTitleService: AppTitleService
+    public _appTitleService: WamasAppTitleService
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -29,5 +29,4 @@ export class AppComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
-
 }

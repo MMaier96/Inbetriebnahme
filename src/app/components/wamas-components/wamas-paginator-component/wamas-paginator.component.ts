@@ -1,8 +1,8 @@
-import { WamasPaginatorService } from '../../../services/wamas-services/wamas-paginator.service';
 import { Component } from '@angular/core';
+import { WamasPaginatorService } from 'src/app/services/wamas-services/wamas-paginator-service/wamas-paginator.service';
 
 @Component({
-  selector: 'app-wamas-paginator',
+  selector: 'wamas-paginator',
   templateUrl: './wamas-paginator.component.html',
   styleUrls: ['./wamas-paginator.component.scss']
 })

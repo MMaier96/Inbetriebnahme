@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class AppTitleService {
+export class WamasAppTitleService {
 
   appTitle: String;
 
@@ -13,7 +13,6 @@ export class AppTitleService {
 
   setAppTitle(title: String): void {
     this.appTitle = title;
-    console.log(this.appTitle);
   }
 
 }
