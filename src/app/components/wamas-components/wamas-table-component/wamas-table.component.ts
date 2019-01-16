@@ -27,7 +27,6 @@ export class WamasTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     private _cdRef: ChangeDetectorRef) { }
 
   ngOnInit() {
-    console.log(this.tableData);
   }
 
   ngOnChanges() {
