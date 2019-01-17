@@ -1,4 +1,4 @@
-import { WamasAppTitleService } from './../../../services/wamas-services/wamas-app-title-service/wamas-app-title.service';
+import { WamasAppTitleService } from 'src/app/services/wamas-services/wamas-app-title-service/wamas-app-title.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

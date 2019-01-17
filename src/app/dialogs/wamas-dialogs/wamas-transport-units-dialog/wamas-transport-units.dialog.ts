@@ -1,7 +1,7 @@
-import { WamasTableService } from './../../../services/wamas-services/wamas-table-service/wamas-table.service';
-import { GraphQLTransportUnitService } from './../../../services/graphql-services/graphql-transport-unit-service/graphql-transport-unit.service';
-import { GraphQLTransportUnit } from './../../../objects/graphql-objects/graphql-transport-unit';
-import { WamasAppTitleService } from './../../../services/wamas-services/wamas-app-title-service/wamas-app-title.service';
+import { WamasTableService } from 'src/app/services/wamas-services/wamas-table-service/wamas-table.service';
+import { GraphQLTransportUnitService } from 'src/app/services/graphql-services/graphql-transport-unit-service/graphql-transport-unit.service';
+import { GraphQLTransportUnit } from 'src/app/objects/graphql-objects/graphql-transport-unit';
+import { WamasAppTitleService } from 'src/app/services/wamas-services/wamas-app-title-service/wamas-app-title.service';
 import { WamasPaginatorService } from 'src/app/services/wamas-services/wamas-paginator-service/wamas-paginator.service';
 
 import { Component, OnInit } from '@angular/core';
