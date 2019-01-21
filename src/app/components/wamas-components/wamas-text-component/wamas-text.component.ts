@@ -2,11 +2,11 @@ import { WamasDynamicLoadable } from './../../../objects/wamas-objects/wamas-dyn
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'wamas-button',
-  templateUrl: './wamas-button.component.html',
-  styleUrls: ['./wamas-button.component.scss']
+  selector: 'wamas-text',
+  templateUrl: './wamas-text.component.html',
+  styleUrls: ['./wamas-text.component.scss']
 })
-export class WamasButtonComponent extends WamasDynamicLoadable implements OnInit {
+export class WamasTextComponent extends WamasDynamicLoadable implements OnInit {
 
   constructor() {
     super();

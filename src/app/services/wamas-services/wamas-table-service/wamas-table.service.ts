@@ -7,6 +7,7 @@ export class WamasTableService {
   displayedColumns: String[];
   elements: any[];
   _wamasPaginatorService: WamasPaginatorService;
+  fn;
 
   constructor( ) { }
 
@@ -32,5 +33,13 @@ export class WamasTableService {
 
   getPaginatorService(): WamasPaginatorService {
     return this._wamasPaginatorService;
+  }
+
+  setComponentFunction(fn) {
+    this.fn = fn;
+  }
+
+  getComponentFunction() {
+    return this.fn;
   }
 }

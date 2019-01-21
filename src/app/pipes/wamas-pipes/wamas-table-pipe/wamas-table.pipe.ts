@@ -11,6 +11,8 @@ export class WamasTablePipe implements PipeTransform {
     }
     const startIndex = page * size ;
     const endIndex = startIndex + size;
+    console.log(tableData);
+
     return tableData.slice(startIndex, endIndex);
   }
 }

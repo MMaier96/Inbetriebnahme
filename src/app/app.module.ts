@@ -39,6 +39,7 @@ import { WamasPaginatorComponent }        from './components/wamas-components/wa
 /* Wamas Services from './services/wamas-services/' */
 import { WamasAppTitleService }           from './services/wamas-services/wamas-app-title-service/wamas-app-title.service';
 import { WamasPaginatorService }          from './services/wamas-services/wamas-paginator-service/wamas-paginator.service';
+import { WamasTextComponent }             from './components/wamas-components/wamas-text-component/wamas-text.component';
 import { WamasTableService }              from './services/wamas-services/wamas-table-service/wamas-table.service';
 
 /* Graphql Services from './services/graphql-services/' */
@@ -66,6 +67,7 @@ import { WamasTablePipe }                 from './pipes/wamas-pipes/wamas-table-
     WamasButtonComponent,
     WamasTableCellComponent,
     WamasTableComponent,
+    WamasTextComponent,
     WamasPaginatorComponent,
 
     /* Custom Components */
@@ -83,7 +85,8 @@ import { WamasTablePipe }                 from './pipes/wamas-pipes/wamas-table-
     HttpClientModule
   ],
   entryComponents: [
-    WamasButtonComponent
+    WamasButtonComponent,
+    WamasTextComponent
   ],
   providers: [
     /* Wamas Services */

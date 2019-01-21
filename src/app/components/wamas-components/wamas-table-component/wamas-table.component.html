@@ -10,7 +10,7 @@
     <ng-container *ngFor="let column of _wamasTableService.getDisplayedColumns()" matColumnDef="{{ column }}">
       <th mat-header-cell *matHeaderCellDef> {{ column | uppercase }} </th>
       <td mat-cell *matCellDef="let element" >
-        <wamas-table-cell [component]='element'></wamas-table-cell>
+        <wamas-table-cell [element]='element' [column]='column' ></wamas-table-cell>
       </td>
     </ng-container>
 

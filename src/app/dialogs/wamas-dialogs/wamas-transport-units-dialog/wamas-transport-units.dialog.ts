@@ -1,6 +1,6 @@
+import { GraphQLTransportUnit } from './../../../objects/graphql-objects/graphql-transport-unit';
 import { WamasTableService } from 'src/app/services/wamas-services/wamas-table-service/wamas-table.service';
 import { GraphQLTransportUnitService } from 'src/app/services/graphql-services/graphql-transport-unit-service/graphql-transport-unit.service';
-import { GraphQLTransportUnit } from 'src/app/objects/graphql-objects/graphql-transport-unit';
 import { WamasAppTitleService } from 'src/app/services/wamas-services/wamas-app-title-service/wamas-app-title.service';
 import { WamasPaginatorService } from 'src/app/services/wamas-services/wamas-paginator-service/wamas-paginator.service';
 
@@ -18,9 +18,8 @@ export class WamasTransportUnitsDialog implements OnInit {
   initialSize: number = this.possibleSizes[0];
 
   /* settings for table template */
-  displayedColumns: String[] = ['id', 'name', 'location'];
+  displayedColumns: String[] = ['id', 'name', 'location', 'hasActiveTransportOrder'];
   elements: GraphQLTransportUnit[];
-  tableData;
 
   constructor(
     private _transportUnits: GraphQLTransportUnitService,
@@ -38,7 +37,7 @@ export class WamasTransportUnitsDialog implements OnInit {
   loadAllTransportUnits(): void {
     this._transportUnits.getAllTransportUnits()
       .subscribe( data => {
-        this.tableData = data;
+        this._wamasTableTemplateService.setComponentFunction(GraphQLTransportUnit.getPropertyComponent);
         this._wamasTableTemplateService.setElements(data);
         this._wamasTableTemplateService.setPaginatorService(this._wamasPaginatorTemplateService);
         this._wamasPaginatorTemplateService.setPageSizes(this.possibleSizes);

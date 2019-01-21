@@ -1,4 +1,4 @@
-import { WamasButtonComponent } from './../wamas-button-component/wamas-button.component';
+import { WamasTableService } from 'src/app/services/wamas-services/wamas-table-service/wamas-table.service';
 
 import { ComponentRef, ComponentFactoryResolver, Component, Input, ViewChild, ViewContainerRef,
   Compiler, ChangeDetectorRef, OnChanges, OnDestroy, AfterViewInit } from '@angular/core';
@@ -10,11 +10,14 @@ import { ComponentRef, ComponentFactoryResolver, Component, Input, ViewChild, Vi
 })
 export class WamasTableCellComponent implements OnChanges, OnDestroy, AfterViewInit {
   @ViewChild('target', { read: ViewContainerRef }) target;
-  @Input() component;
+  @Input() element;
+  @Input() column;
+
   cmpRef: ComponentRef<any>;
   private isViewInitialized = false;
 
   constructor(
+    private _wamasTableService: WamasTableService,
     private componentFactoryResolver: ComponentFactoryResolver,
     private compiler: Compiler,
     private cdRef: ChangeDetectorRef) { }
@@ -23,12 +26,19 @@ export class WamasTableCellComponent implements OnChanges, OnDestroy, AfterViewI
     if (!this.isViewInitialized) {
       return;
     }
+
     if (this.cmpRef) {
       this.cmpRef.destroy();
     }
 
-    const factory = this.componentFactoryResolver.resolveComponentFactory(WamasButtonComponent);
+    const component = this._wamasTableService.getComponentFunction()(this.column);
+    const factory = this.componentFactoryResolver.resolveComponentFactory(component);
+
     this.cmpRef = this.target.createComponent(factory);
+    this.cmpRef.instance.setData(this.element[this.column]);
+
+
+
     this.cdRef.detectChanges();
   }
 
