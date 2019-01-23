@@ -1,7 +1,7 @@
-import { WamasAppTitleService } from './services/wamas-services/wamas-app-title-service/wamas-app-title.service';
+
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
-
+import { AppTitleService } from './services/app-title.service';
 
 @Component({
   selector: 'main',
@@ -19,7 +19,7 @@ export class MainComponent implements OnDestroy {
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
-    public _appTitleService: WamasAppTitleService
+    public _appTitleService: AppTitleService
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();

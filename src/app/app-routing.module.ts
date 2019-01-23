@@ -1,13 +1,15 @@
-import { WamasTransportUnitsDialog } from './dialogs/wamas-dialogs/wamas-transport-units-dialog/wamas-transport-units.dialog';
-import { WamasDashboardDialog } from './dialogs/wamas-dialogs/wamas-dashboard-dialog/wamas-dashboard.dialog';
-
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { TransportUnitDialog } from './dialogs/transport-unit/transport-unit.dialog';
+import { TransportOrderDialog } from './dialogs/transport-order/transport-order.dialog';
+import { DashboardDialog } from './dialogs/dashboard/dashboard.dialog';
+
 const routes: Routes = [
-  {    path: '',                    component: WamasDashboardDialog },
-  {    path: 'dashboard',           component: WamasDashboardDialog },
-  {    path: 'transport-units',     component: WamasTransportUnitsDialog }
+  { path: '', component: DashboardDialog },
+  { path: 'dashboard', component: DashboardDialog },
+  { path: 'transport-units', component: TransportUnitDialog },
+  { path: 'transport-orders', component: TransportOrderDialog }
 ];
 
 @NgModule({
