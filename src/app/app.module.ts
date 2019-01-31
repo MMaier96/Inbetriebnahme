@@ -12,15 +12,25 @@ import { TransportOrderDialog } from './dialogs/transport-order/transport-order.
 import { DashboardDialog } from './dialogs/dashboard/dashboard.dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
-
+import { IsTOActivePipe } from './is-toactive.pipe';
+import { DashboardGridGutterSizePipe } from 'src/app/dashboard-grid-gutter-size.pipe';
+import { DashboardGridRowHeightPipe } from './dashboard-grid-row-height.pipe';
+import { DashboardGridColsPipe } from './dashboard-grid-cols.pipe';
+import { DashboardGridSizePipe } from './dashboard-grid-size.pipe';
 
 @NgModule({
   declarations: [
+    DashboardGridGutterSizePipe,
+    DashboardGridColsPipe,
+    DashboardGridSizePipe,
+    DashboardGridRowHeightPipe,
+    DashboardGridGutterSizePipe,
     MainComponent,
     DashboardDialog,
     TransportUnitDialog,
     TransportOrderDialog,
-    CheckboxComponent
+    CheckboxComponent,
+    IsTOActivePipe,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +42,10 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
   entryComponents: [
   ],
   providers: [
+    DashboardGridGutterSizePipe,
+    DashboardGridColsPipe,
+    DashboardGridRowHeightPipe,
+    DashboardGridSizePipe,
     AppTitleService,
     TransportUnitService,
     TransportOrderService

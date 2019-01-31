@@ -24,7 +24,7 @@
 
     <ng-container matColumnDef="order">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Order </th>
-      <td mat-cell *matCellDef="let row"> <mat-checkbox [disabled]="true" [checked]="row.activeTransportOrder.isActive"></mat-checkbox> </td>
+      <td mat-cell *matCellDef="let row"> <mat-checkbox [disabled]="true" [checked]="row.activeTransportOrder | isTOActive "></mat-checkbox> </td>
     </ng-container>
 
     <ng-container matColumnDef="error">

@@ -1,3 +1,23 @@
-<p>
-  dashboard works!
-</p>
+<mat-grid-list [cols]="cols" [rowHeight]="rowHeight" [gutterSize]="gutterSize" (window:resize)="onResize($event)">
+  <mat-grid-tile [attr.size]="cols | dashboardGridSize" routerLink="../transport-units">
+    <div class="notifications">1</div>
+    <mat-grid-tile-header>Transport Unit Dialog</mat-grid-tile-header>
+    <img src="../../../assets/icons/transport-unit.svg">
+  </mat-grid-tile>
+  <mat-grid-tile [attr.size]="cols | dashboardGridSize" routerLink="../transport-orders">
+    <div class="notifications">3</div>
+    <mat-grid-tile-header>Transport Order Dialog</mat-grid-tile-header>
+    <img src="../../../assets/icons/transport-order.svg">
+  </mat-grid-tile>
+  <mat-grid-tile [attr.size]="cols | dashboardGridSize" routerLink="../transport-units">
+    <div class="notifications">23</div>
+    <mat-grid-tile-header>Transport Unit Dialog</mat-grid-tile-header>
+    <img src="../../../assets/icons/transport-unit.svg">
+  </mat-grid-tile>
+  <mat-grid-tile [attr.size]="cols | dashboardGridSize" routerLink="../transport-orders">
+    <div class="notifications">5</div>
+    <mat-grid-tile-header>Transport Order Dialog</mat-grid-tile-header>
+    <img src="../../../assets/icons/transport-order.svg">
+  </mat-grid-tile>
+
+</mat-grid-list>

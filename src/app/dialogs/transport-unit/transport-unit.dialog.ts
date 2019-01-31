@@ -1,13 +1,13 @@
+import { TransportUnitService } from './../../services/transport-unit.service';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { TransportUnit } from '../../objects/transport-unit';
-import { HttpClient } from '@angular/common/http';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 
 @Component({
   selector: 'transport-unit-dialog',
-  styleUrls: ['transport-unit.dialog.css'],
+  styleUrls: ['transport-unit.dialog.scss'],
   templateUrl: 'transport-unit.dialog.html',
   animations: [
     trigger('detailExpand', [
@@ -28,7 +28,7 @@ export class TransportUnitDialog implements OnInit {
   expandedElement: TransportUnit | null;
 
   /* Inject the Service */
-  constructor(private _http: HttpClient) { }
+  constructor(private _tuService: TransportUnitService) { }
 
   /* Lifcycle-Hook onCreation */
   ngOnInit() {
@@ -40,7 +40,7 @@ export class TransportUnitDialog implements OnInit {
 
   /* Load data from Service */
   loadData() {
-    this._http.get<TransportUnit[]>('https://api.myjson.com/bins/1fmqus').subscribe(data => {
+    this._tuService.getAllTransportUnits().subscribe(data => {
       this.dataSource.data = data;
     });
   }

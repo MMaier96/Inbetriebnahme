@@ -28,3 +28,20 @@ img.logo {
   position: absolute;
   right: 30px;
 }
+
+.mat-toolbar.mat-primary {
+  background: #ffed00;
+  color: #000;
+  z-index: 200;
+  box-shadow: 0px -3px 5px 2px #000000b0;
+}
+.mat-list-base .mat-list-item{
+  border-bottom: 1px solid #00000077;
+}
+
+.mat-list-base .mat-list-item {
+  padding: 0 35px 0px 16px;
+}
+.mat-list-base {
+  padding-top: 0px;
+}
