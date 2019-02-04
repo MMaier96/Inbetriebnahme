@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: '', component: DashboardDialog },
   { path: 'dashboard', component: DashboardDialog },
   { path: 'transport-units', component: TransportUnitDialog },
+  { path: 'transport-units/:filter', component: TransportUnitDialog },
   { path: 'transport-orders', component: TransportOrderDialog }
 ];
 

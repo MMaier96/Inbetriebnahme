@@ -9,3 +9,9 @@ img.icon {
 a[mat-list-item]{
   margin-right: 10px;
 }
+
+.mat-fab.mat-primary, .mat-flat-button.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary {
+  background-color: #ffef00;
+  color: #141621;
+  text-shadow: 0.3px 0.3px 1.2px #0000003b;
+}

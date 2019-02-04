@@ -17,29 +17,44 @@ export class TransportUnitService {
   /* Inject the HTTP Client */
   constructor( private http: HttpClient) { }
 
-  getAllTransportUnits(): Observable<TransportUnit[]> {
+  getAllTransportUnits(filter?: string): Observable<TransportUnit[]> {
+    filter = filter || '';
     return this.http.post<GraphQLResponse>('/query', {
-      filter: 'HRA*',
-      startIndex: 50,
-      endIndex: 100,
-      orderBy: 'transportUnits.location.name',
-      ascending: true,
       query: `{
-        transportUnits(testArg:"%", limit: 50)  {
+        transportUnits(
+        offset: 50,
+        name: "%` + filter + `%",
+        first: 0
+      ) {
+        id
+        name
+        type {
           name
-          location {
-            name
-          }
-          type {
-            name
-          }
-          activeTransportOrder {
-            isActive
-          }
         }
-      }`
+        location{
+          name
+        }
+        transportOrders {
+          error
+        }
+        activeTransportOrder {
+          isActive
+        }
+      }
+    }`
     }, httpOptions).pipe(
       map( response => response.data.transportUnits)
+    );
+  }
+
+  getAllTransportUnitsCount(filter?: string): Observable<number> {
+    filter = filter || '';
+    return this.http.post<GraphQLResponse>('/query', {
+      query: `{
+        transportUnitsCount(name:"%` + filter + `%")
+      }`
+    }, httpOptions).pipe(
+      map( response => response.data.transportUnitsCount)
     );
   }
 }
