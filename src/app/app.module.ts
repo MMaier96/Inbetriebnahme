@@ -17,6 +17,7 @@ import { DashboardGridGutterSizePipe } from 'src/app/dashboard-grid-gutter-size.
 import { DashboardGridRowHeightPipe } from './dashboard-grid-row-height.pipe';
 import { DashboardGridColsPipe } from './dashboard-grid-cols.pipe';
 import { DashboardGridSizePipe } from './dashboard-grid-size.pipe';
+import { LoginDialog } from './dialogs/login/login.dialog';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { DashboardGridSizePipe } from './dashboard-grid-size.pipe';
     TransportOrderDialog,
     CheckboxComponent,
     IsTOActivePipe,
+    LoginDialog
   ],
   imports: [
     BrowserModule,

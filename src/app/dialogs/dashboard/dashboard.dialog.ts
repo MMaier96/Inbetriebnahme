@@ -1,4 +1,3 @@
-import { DashboardGridSizePipe } from './../../dashboard-grid-size.pipe';
 import { DashboardGridColsPipe } from '../../dashboard-grid-cols.pipe';
 import { AppTitleService } from 'src/app/services/app-title.service';
 import { Component, OnInit } from '@angular/core';
@@ -15,6 +14,27 @@ export class DashboardDialog implements OnInit {
   rowHeight: string;
   cols: number;
   gutterSize: string;
+  favorites = [{
+    name: 'TransportUnitDialog',
+    link: './transport-units',
+    icon: '../../../assets/icons/white-transparent/transport-unit.svg',
+    content: 'Preview goes here ...'
+  }, {
+    name: 'TransportOrderDialog',
+    link: './transport-orders',
+    icon: '../../../assets/icons/white-transparent/transport-unit.svg',
+    content: 'Preview goes here ...'
+  }, {
+    name: 'TransportUnitDialog',
+    link: './transport-units',
+    icon: '../../../assets/icons/white-transparent/transport-unit.svg',
+    content: 'Preview goes here ...'
+  }, {
+    name: 'TransportOrderDialog',
+    link: './transport-orders',
+    icon: '../../../assets/icons/white-transparent/transport-unit.svg',
+    content: 'Preview goes here ...'
+  }];
 
   constructor(
     private _appTitleService: AppTitleService,

@@ -1,3 +1,4 @@
+<mat-progress-bar *ngIf="mode === 'indeterminate'" [mode]="mode"></mat-progress-bar>
 <mat-form-field>
   <input #filterinput matInput type="text" placeholder="Search for any value ..." [value]="filter">
   <button mat-button *ngIf="filterinput.value" matSuffix mat-icon-button aria-label="Clear" (click)="filterinput.value=''">
@@ -5,6 +6,25 @@
   </button>
 </mat-form-field>
 <button mat-raised-button color="primary" (click)="search(filterinput.value)">Search</button>
+
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Dialog Actions
+      </mat-panel-title>
+      <mat-panel-description>
+        click to expand
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <button mat-raised-button color="primary">Action 1</button>
+    <button mat-raised-button color="primary">Action 2</button>
+    <button mat-raised-button color="primary">Action 3</button>
+    <button mat-raised-button color="primary">Action 4</button>
+  </mat-expansion-panel>
+</mat-accordion>
+
 
 <div class="example-container mat-elevation-z8">
 <table mat-table

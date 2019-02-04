@@ -1,11 +1,13 @@
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+
+<app-login *ngIf="!loggedIn"></app-login>
+<div class="example-container" *ngIf="loggedIn" [class.example-is-mobile]="mobileQuery.matches">
   <!-- Top Toolbar with Title -->
   <mat-toolbar color="primary" class="example-toolbar">
     <mat-toolbar-row>
       <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
       <h1 class="example-app-name">{{ _appTitleService.getAppTitle() }}</h1>
       <span class="example-spacer"></span>
-      <img class="logo" src='./assets/wamas_logo.png'>
+      <img class="logo" src='./assets/wamas_logo_white.png'>
     </mat-toolbar-row>
   </mat-toolbar>
 
@@ -15,17 +17,19 @@
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
       <mat-nav-list>
           <a mat-list-item routerLink="dashboard">
-            <img class="icon" src='./assets/icons/dashboard.svg'>Dashboard</a>
+            <img class="icon" src='./assets/icons/dark/dashboard.svg'>Dashboard</a>
           <a mat-list-item routerLink="transport-units">
-            <img class="icon" src='./assets/icons/transport-unit.svg'>TransportUnits</a>
+            <img class="icon" src='./assets/icons/dark/transport-unit.svg'>TransportUnits</a>
           <a mat-list-item routerLink="transport-orders">
-            <img class="icon" src='./assets/icons/transport-order.svg'>TransportOrders</a>
+            <img class="icon" src='./assets/icons/dark/transport-order.svg'>TransportOrders</a>
+          <a mat-list-item class="logout" (click)="logout()">
+              <img class="icon" src='./assets/icons/dark/logout.svg'>Logout</a>
       </mat-nav-list>
     </mat-sidenav>
 
     <!-- Page Conent-->
     <mat-sidenav-content>
-      <router-outlet></router-outlet>
+        <router-outlet></router-outlet>
     </mat-sidenav-content>
 
   </mat-sidenav-container>

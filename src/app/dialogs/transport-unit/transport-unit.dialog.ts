@@ -1,3 +1,4 @@
+import { AppTitleService } from './../../services/app-title.service';
 import { TransportUnitService } from './../../services/transport-unit.service';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { TransportUnit } from '../../objects/transport-unit';
@@ -31,14 +32,19 @@ export class TransportUnitDialog implements OnInit {
   maxItems: number;
   searchValue: string;
   filter: string;
+  panelOpenState = false;
+  mode = 'indeterminate';
 
   /* Inject the Service */
-  constructor(private _tuService: TransportUnitService,
+  constructor(
+    private _tuService: TransportUnitService,
+    private _appTitleService: AppTitleService,
     private route: ActivatedRoute,
     private location: Location) { }
 
   /* Lifcycle-Hook onCreation */
   ngOnInit() {
+    this._appTitleService.setAppTitle('TransportUnits');
     this.route.paramMap.subscribe(params => {
       this.filter = params.get('filter');
     });
@@ -66,6 +72,8 @@ export class TransportUnitDialog implements OnInit {
   loadData(filter?: string) {
     this._tuService.getAllTransportUnits(filter).subscribe(data => {
       this.dataSource.data = data;
+      this.mode = 'determinate';
+
     });
     this._tuService.getAllTransportUnitsCount(filter).subscribe(data => this.maxItems = data);
   }

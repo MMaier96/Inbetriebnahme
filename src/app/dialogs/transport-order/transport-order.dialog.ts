@@ -1,3 +1,4 @@
+import { AppTitleService } from './../../services/app-title.service';
 import { TransportUnitService } from './../../services/transport-unit.service';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { TransportUnit } from '../../objects/transport-unit';
@@ -28,10 +29,14 @@ export class TransportOrderDialog implements OnInit {
   expandedElement: TransportUnit | null;
 
   /* Inject the Service */
-  constructor(private _tuService: TransportUnitService) { }
+  constructor(
+    private _tuService: TransportUnitService,
+    private _appTitleService: AppTitleService,
+    ) { }
 
   /* Lifcycle-Hook onCreation */
   ngOnInit() {
+    this._appTitleService.setAppTitle('TransportOrders');
     this.dataSource = new MatTableDataSource<TransportUnit>();
     this.loadData();
     this.dataSource.paginator = this.paginator;
