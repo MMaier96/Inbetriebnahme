@@ -17,6 +17,20 @@ export class MainComponent implements OnDestroy, OnInit {
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
 
+  /* NavItems */
+  navItems = [{
+    routerLink: 'dashboard',
+    name: 'Dashboard',
+    icon: './assets/icons/dark/dashboard.svg'
+  }, {
+    routerLink: 'transport-units',
+    name: 'TransportUnits',
+    icon: './assets/icons/dark/transport-unit.svg'
+  }, {
+    routerLink: 'transport-orders',
+    name: 'TransportOrders',
+    icon: './assets/icons/dark/transport-order.svg'
+  }];
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
