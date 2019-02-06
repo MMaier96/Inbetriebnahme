@@ -4,10 +4,18 @@
   <!-- Top Toolbar with Title -->
   <mat-toolbar color="primary" class="example-toolbar">
     <mat-toolbar-row>
-      <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-      <h1 class="example-app-name">{{ _appTitleService.getAppTitle() }}</h1>
+      <div *ngIf="!isDetailsView">
+        <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+        <h1 class="example-app-name">{{ appTitle }}</h1>
+      </div>
+
+      <div *ngIf="isDetailsView" (click)="navigateBack()">
+        <button mat-icon-button><mat-icon>arrow_back_ios</mat-icon></button>
+        <h1 class="example-app-name">Back</h1>
+      </div>
       <span class="example-spacer"></span>
       <img class="logo" src='./assets/wamas_logo_white.png'>
+      <mat-icon matBadge="15" *ngIf="true" matBadgeColor="warn">warning</mat-icon>
     </mat-toolbar-row>
   </mat-toolbar>
 
@@ -25,7 +33,7 @@
 
     <!-- Page Conent-->
     <mat-sidenav-content>
-        <router-outlet></router-outlet>
+        <router-outlet (isDetailsView)="changeDetailsView($event)"></router-outlet>
     </mat-sidenav-content>
 
   </mat-sidenav-container>

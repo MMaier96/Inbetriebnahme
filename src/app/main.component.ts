@@ -11,6 +11,7 @@ import { AppTitleService } from './services/app-title.service';
 export class MainComponent implements OnDestroy, OnInit {
   /* Settings for general APP */
   appTitle: String;
+  isDetailsView: boolean;
   loggedIn = false;
 
   /* Mobile Listener */
@@ -47,11 +48,28 @@ export class MainComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
     if (localStorage.getItem('user') != null) {
       this.loggedIn = true;
+
+      this._appTitleService.title.subscribe( title => {
+        console.log(title);
+        this.appTitle = title;
+      });
+      this._appTitleService.isDetailsView.subscribe( isDetailsView => {
+        console.log(isDetailsView);
+        this.isDetailsView = isDetailsView;
+      });
     }
   }
 
   logout() {
     localStorage.removeItem('user');
     window.location.reload();
+  }
+
+  navigateBack(): void {
+    window.history.back();
+  }
+
+  changeDetailsView(event) {
+    console.log(event);
   }
 }

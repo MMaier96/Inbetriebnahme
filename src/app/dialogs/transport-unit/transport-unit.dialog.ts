@@ -32,6 +32,7 @@ export class TransportUnitDialog implements OnInit {
   /* Class variables for HTML-Template and TS-Logic */
     columnsToDisplay = ['name', 'type', 'location', 'order', 'error'];
     dataSource: MatTableDataSource<TransportUnit>;
+    expandedElement: TransportUnit | null;
     filter: string;
     maxItems: number;
     panelOpenState = false;
@@ -51,6 +52,8 @@ export class TransportUnitDialog implements OnInit {
    */
   ngOnInit(): void {
     this._appTitleService.setAppTitle('TransportUnits');
+    this._appTitleService.setDetailsView(false);
+
     this.route.paramMap.subscribe(params => {
       this.filter = params.get('filter');
     });

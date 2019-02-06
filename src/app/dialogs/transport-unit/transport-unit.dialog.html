@@ -88,7 +88,7 @@
               <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                 <button mat-raised-button>Jump to 'Location Dialog'</button>
                 <button mat-raised-button>Jump to 'TransportOrder Dialog'</button>
-                <button mat-raised-button color="primary">View more Details</button>
+                <button mat-raised-button color="primary" [routerLink]="'details/' + element.id">View more Details</button>
               </div>
             </td>
           </ng-container>
