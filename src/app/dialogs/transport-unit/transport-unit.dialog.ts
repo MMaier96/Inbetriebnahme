@@ -133,7 +133,6 @@ export class TransportUnitDialog implements OnInit, AfterContentInit {
    */
   ngAfterContentInit(): void {
     setTimeout(() => {
-      this._appTitleService.setAppTitle('TransportUnits');
       this._appTitleService.setDetailsView(false);
     }, 0);
   }

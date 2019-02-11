@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, AfterContentInit } from '@angular/core';
@@ -47,7 +48,8 @@ export class MainComponent implements OnDestroy, OnInit, AfterContentInit {
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
-    public _appTitleService: AppTitleService
+    public _appTitleService: AppTitleService,
+    private route: ActivatedRoute
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 800px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -74,12 +76,22 @@ export class MainComponent implements OnDestroy, OnInit, AfterContentInit {
 
   ngAfterContentInit(): void {
     if (this.loggedIn) {
-      this._appTitleService.title.subscribe( title => {
-        this.appTitle = title;
-      });
       this._appTitleService.isDetailsView.subscribe( isDetailsView => {
         this.isDetailsView = isDetailsView;
+        if (!isDetailsView) {
+          const routeName = this.route.snapshot['_routerState'].url.replace('/', '');
+          for (const item of this.navItems) {
+            if (item.routerLink === routeName) {
+              this.appTitle = item.name;
+            }
+          }
+        }
       });
     }
+  }
+
+  navItemClick(snav, item): void {
+    snav.toggle();
+    this.appTitle = item.name;
   }
 }

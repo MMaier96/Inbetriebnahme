@@ -44,7 +44,6 @@ export class ControllerDialog implements OnInit {
 
   /* Lifcycle-Hook onCreation */
   ngOnInit() {
-    this._appTitleService.setAppTitle('TransportUnits');
     this.route.paramMap.subscribe(params => {
       this.filter = params.get('filter');
     });
@@ -73,7 +72,6 @@ export class ControllerDialog implements OnInit {
     this._tuService.getAllTransportUnits(filter).subscribe(data => {
       this.dataSource.data = data;
       this.mode = 'determinate';
-
     });
     this._tuService.getAllTransportUnitsCount(filter).subscribe(data => this.maxItems = data);
   }

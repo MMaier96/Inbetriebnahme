@@ -44,7 +44,6 @@ export class LocationsDialog implements OnInit {
 
   /* Lifcycle-Hook onCreation */
   ngOnInit() {
-    this._appTitleService.setAppTitle('TransportUnits');
     this.route.paramMap.subscribe(params => {
       this.filter = params.get('filter');
     });

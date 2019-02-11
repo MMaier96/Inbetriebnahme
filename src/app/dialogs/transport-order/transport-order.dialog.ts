@@ -66,7 +66,6 @@ export class TransportOrderDialog implements OnInit, AfterContentInit {
    */
   ngAfterContentInit(): void {
     setTimeout(() => {
-      this._appTitleService.setAppTitle('TransportOrders');
       this._appTitleService.setDetailsView(false);
     }, 0);
   }

@@ -61,7 +61,6 @@ export class DashboardDialog implements OnInit, AfterContentInit {
    */
   ngAfterContentInit(): void {
     setTimeout(() => {
-      this._appTitleService.setAppTitle('Dashboard');
       this._appTitleService.setDetailsView(false);
     }, 0);
   }

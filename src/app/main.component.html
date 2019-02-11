@@ -37,7 +37,7 @@
 
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
       <mat-nav-list>
-          <a *ngFor="let item of navItems" mat-list-item [routerLink]="item.routerLink" (click)="snav.toggle()">
+          <a *ngFor="let item of navItems" mat-list-item [routerLink]="item.routerLink" (click)="navItemClick(snav, item)">
             <img class="icon" [src]='item.icon'>{{item.name}}</a>
           <a mat-list-item class="logout" (click)="logout()">
               <img class="icon" src='./assets/icons/dark/logout.svg'>Logout</a>
