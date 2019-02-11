@@ -3,7 +3,7 @@
 
 /* GLOBAL STYLES */
 img.icon {
-  width: 25px;
+  width: 33px;
   padding-right: 10px;
 }
 a[mat-list-item]{
@@ -11,4 +11,16 @@ a[mat-list-item]{
 }
 body {
   margin: 0px !important;
+}
+.mat-drawer-container {
+  background-color: #fff;
+  color: rgba(0,0,0,.87);
+}
+@media (min-width: 600px){
+  .mat-toolbar-row, .mat-toolbar-single-row {
+    height: 56px !important;
+  }
+}
+.mat-toolbar-multiple-rows {
+  min-height: 56px !important;
 }

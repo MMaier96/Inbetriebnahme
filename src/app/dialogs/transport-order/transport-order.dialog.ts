@@ -1,6 +1,6 @@
 import { AppTitleService } from './../../services/app-title.service';
 import { TransportUnitService } from './../../services/transport-unit.service';
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterContentInit } from '@angular/core';
 import { TransportUnit } from '../../objects/transport-unit';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -18,7 +18,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     ]),
   ],
 })
-export class TransportOrderDialog implements OnInit {
+export class TransportOrderDialog implements OnInit, AfterContentInit {
   /* Load Elements from Template */
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -36,7 +36,6 @@ export class TransportOrderDialog implements OnInit {
 
   /* Lifcycle-Hook onCreation */
   ngOnInit() {
-    this._appTitleService.setAppTitle('TransportOrders');
     this.dataSource = new MatTableDataSource<TransportUnit>();
     this.loadData();
     this.dataSource.paginator = this.paginator;
@@ -59,5 +58,16 @@ export class TransportOrderDialog implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  /**
+   * Bugfix: https://stackoverflow.com/questions/43375532/expressionchangedafterithasbeencheckederror-explained
+   * setTimeout() ist needed to avoid error on changing parents data over service
+   */
+  ngAfterContentInit(): void {
+    setTimeout(() => {
+      this._appTitleService.setAppTitle('TransportOrders');
+      this._appTitleService.setDetailsView(false);
+    }, 0);
   }
 }

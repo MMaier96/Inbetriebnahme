@@ -57,4 +57,43 @@ export class TransportUnitService {
       map( response => response.data.transportUnitsCount)
     );
   }
+
+  getTransportUnitByName(tuName: string) {
+    return this.http.post<GraphQLResponse>('/query', {
+      query: `{
+        transportUnits(
+        offset: 1,
+        name: "` + tuName + `",
+        first: 0
+      ) {
+        id
+        name
+        type {
+          id
+          name
+          typeSocId
+        }
+        location{
+          id
+          name
+          hostName
+          description
+        }
+        transportOrders {
+          id
+          nextTarget {
+            name
+          }
+          isActive
+          error
+        }
+        activeTransportOrder {
+          isActive
+        }
+      }
+    }`
+    }, httpOptions).pipe(
+      map( response => response.data.transportUnits)
+    );
+  }
 }

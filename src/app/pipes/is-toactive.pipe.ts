@@ -1,4 +1,4 @@
-import { TransportOrder } from './objects/transport-order';
+import { TransportOrder } from '../objects/transport-order';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({

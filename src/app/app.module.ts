@@ -1,3 +1,4 @@
+import { TransportUnitDetails } from './dialogs/transport-unit/details/transport-unit-details.dialog';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,16 +13,22 @@ import { TransportOrderDialog } from './dialogs/transport-order/transport-order.
 import { DashboardDialog } from './dialogs/dashboard/dashboard.dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
-import { IsTOActivePipe } from './is-toactive.pipe';
-import { DashboardGridGutterSizePipe } from 'src/app/dashboard-grid-gutter-size.pipe';
-import { DashboardGridRowHeightPipe } from './dashboard-grid-row-height.pipe';
-import { DashboardGridColsPipe } from './dashboard-grid-cols.pipe';
-import { DashboardGridSizePipe } from './dashboard-grid-size.pipe';
+import { IsTOActivePipe } from './pipes/is-toactive.pipe';
+import { DashboardGridGutterSizePipe } from 'src/app/pipes/dashboard-grid-gutter-size.pipe';
+import { DashboardGridRowHeightPipe } from './pipes/dashboard-grid-row-height.pipe';
+import { DashboardGridColsPipe } from './pipes/dashboard-grid-cols.pipe';
+import { DashboardGridSizePipe } from './pipes/dashboard-grid-size.pipe';
 import { LoginDialog } from './dialogs/login/login.dialog';
-import { DetailsComponent } from './components/details/details.component';
+import { HasAnyToErrorPipe } from './pipes/has-any-to-error.pipe';
+import { LocationsDialog } from './dialogs/locations/locations.dialog';
+import { ControllerDialog } from './dialogs/controller/controller.dialog';
+import { ServicesDialog } from './dialogs/services/services.dialog';
 
 @NgModule({
   declarations: [
+    ServicesDialog,
+    ControllerDialog,
+    LocationsDialog,
     DashboardGridGutterSizePipe,
     DashboardGridColsPipe,
     DashboardGridSizePipe,
@@ -34,7 +41,8 @@ import { DetailsComponent } from './components/details/details.component';
     CheckboxComponent,
     IsTOActivePipe,
     LoginDialog,
-    DetailsComponent
+    TransportUnitDetails,
+    HasAnyToErrorPipe
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, AfterContentInit } from '@angular/core';
 import { AppTitleService } from './services/app-title.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { AppTitleService } from './services/app-title.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnDestroy, OnInit {
+export class MainComponent implements OnDestroy, OnInit, AfterContentInit {
   /* Settings for general APP */
   appTitle: String;
   isDetailsView: boolean;
@@ -24,6 +24,10 @@ export class MainComponent implements OnDestroy, OnInit {
     name: 'Dashboard',
     icon: './assets/icons/dark/dashboard.svg'
   }, {
+    routerLink: 'controller',
+    name: 'Controller',
+    icon: './assets/icons/dark/controller.svg'
+  }, {
     routerLink: 'transport-units',
     name: 'TransportUnits',
     icon: './assets/icons/dark/transport-unit.svg'
@@ -31,6 +35,14 @@ export class MainComponent implements OnDestroy, OnInit {
     routerLink: 'transport-orders',
     name: 'TransportOrders',
     icon: './assets/icons/dark/transport-order.svg'
+  }, {
+    routerLink: 'locations',
+    name: 'Locations',
+    icon: './assets/icons/dark/locations.svg'
+  }, {
+    routerLink: 'services',
+    name: 'Services',
+    icon: './assets/icons/dark/services.svg'
   }];
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -48,15 +60,6 @@ export class MainComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
     if (localStorage.getItem('user') != null) {
       this.loggedIn = true;
-
-      this._appTitleService.title.subscribe( title => {
-        console.log(title);
-        this.appTitle = title;
-      });
-      this._appTitleService.isDetailsView.subscribe( isDetailsView => {
-        console.log(isDetailsView);
-        this.isDetailsView = isDetailsView;
-      });
     }
   }
 
@@ -69,7 +72,14 @@ export class MainComponent implements OnDestroy, OnInit {
     window.history.back();
   }
 
-  changeDetailsView(event) {
-    console.log(event);
+  ngAfterContentInit(): void {
+    if (this.loggedIn) {
+      this._appTitleService.title.subscribe( title => {
+        this.appTitle = title;
+      });
+      this._appTitleService.isDetailsView.subscribe( isDetailsView => {
+        this.isDetailsView = isDetailsView;
+      });
+    }
   }
 }

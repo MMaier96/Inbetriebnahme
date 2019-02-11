@@ -16,6 +16,19 @@
       <span class="example-spacer"></span>
       <img class="logo" src='./assets/wamas_logo_white.png'>
       <mat-icon matBadge="15" *ngIf="true" matBadgeColor="warn">warning</mat-icon>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>update</mat-icon>
+            <span>Reload Dialog</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>add</mat-icon>
+            <span>Add Dialog to Dashboard</span>
+          </button>
+        </mat-menu>
     </mat-toolbar-row>
   </mat-toolbar>
 
@@ -24,7 +37,7 @@
 
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
       <mat-nav-list>
-          <a *ngFor="let item of navItems" mat-list-item [routerLink]="item.routerLink">
+          <a *ngFor="let item of navItems" mat-list-item [routerLink]="item.routerLink" (click)="snav.toggle()">
             <img class="icon" [src]='item.icon'>{{item.name}}</a>
           <a mat-list-item class="logout" (click)="logout()">
               <img class="icon" src='./assets/icons/dark/logout.svg'>Logout</a>
@@ -33,7 +46,7 @@
 
     <!-- Page Conent-->
     <mat-sidenav-content>
-        <router-outlet (isDetailsView)="changeDetailsView($event)"></router-outlet>
+        <router-outlet></router-outlet>
     </mat-sidenav-content>
 
   </mat-sidenav-container>

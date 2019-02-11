@@ -1,6 +1,6 @@
 import { AppTitleService } from './../../services/app-title.service';
 import { TransportUnitService } from './../../services/transport-unit.service';
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterContentInit } from '@angular/core';
 import { TransportUnit } from '../../objects/transport-unit';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -20,7 +20,7 @@ import { Location } from '@angular/common';
     ]),
   ],
 })
-export class TransportUnitDialog implements OnInit {
+export class TransportUnitDialog implements OnInit, AfterContentInit {
 
   /* HTML-Template Elements */
     @ViewChild(MatPaginator)
@@ -51,9 +51,6 @@ export class TransportUnitDialog implements OnInit {
    * Lifecycle-hook for the creation of the app.
    */
   ngOnInit(): void {
-    this._appTitleService.setAppTitle('TransportUnits');
-    this._appTitleService.setDetailsView(false);
-
     this.route.paramMap.subscribe(params => {
       this.filter = params.get('filter');
     });
@@ -127,5 +124,17 @@ export class TransportUnitDialog implements OnInit {
    */
   resetFilter(): void {
     this.filter = '';
+  }
+
+
+  /**
+   * Bugfix: https://stackoverflow.com/questions/43375532/expressionchangedafterithasbeencheckederror-explained
+   * setTimeout() ist needed to avoid error on changing parents data over service
+   */
+  ngAfterContentInit(): void {
+    setTimeout(() => {
+      this._appTitleService.setAppTitle('TransportUnits');
+      this._appTitleService.setDetailsView(false);
+    }, 0);
   }
 }
