@@ -1,7 +1,6 @@
 <!-- ProgressBar for loading Query -->
   <mat-progress-bar *ngIf="queryMode === 'indeterminate'" [mode]="queryMode"></mat-progress-bar>
 
-
 <!-- Search with Clear Button -->
   <mat-form-field>
     <!-- Input for search -->
@@ -25,21 +24,21 @@
       <mat-expansion-panel-header>
         <!-- Title -->
           <mat-panel-title>
-            Dialog Actions
+            Actions
           </mat-panel-title>
 
         <!-- Description -->
           <mat-panel-description>
-            click to expand
+            ( click to show dialog actions ... )
           </mat-panel-description>
 
       </mat-expansion-panel-header>
 
       <!-- Action Buttons -->
-        <button mat-raised-button color="primary">Action 1</button>
-        <button mat-raised-button color="primary">Action 2</button>
-        <button mat-raised-button color="primary">Action 3</button>
-        <button mat-raised-button color="primary">Action 4</button>
+        <button mat-raised-button>Create TransportUnit</button>
+        <button mat-raised-button>Delete TransportUnit</button>
+        <button mat-raised-button>Action 3</button>
+        <button mat-raised-button>Action 4</button>
 
     </mat-expansion-panel>
   </mat-accordion>
