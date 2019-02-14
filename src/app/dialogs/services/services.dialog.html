@@ -7,75 +7,26 @@
 </mat-form-field>
 <button mat-raised-button color="primary" (click)="search(filterinput.value)">Search</button>
 
-<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Dialog Actions
-      </mat-panel-title>
-      <mat-panel-description>
-        click to expand
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-
-    <button mat-raised-button color="primary">Action 1</button>
-    <button mat-raised-button color="primary">Action 2</button>
-    <button mat-raised-button color="primary">Action 3</button>
-    <button mat-raised-button color="primary">Action 4</button>
-  </mat-expansion-panel>
-</mat-accordion>
-
-
 <div class="example-container mat-elevation-z8">
-<table mat-table
-       [dataSource]="dataSource" multiTemplateDataRows matSort>
+<table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
 
   <!-- START COLUMN DEFINITION -->
     <ng-container matColumnDef="name" sticky>
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let row"> {{(row ||{}).name}} </td>
+      <td mat-cell *matCellDef="let row"> {{row?.name}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
-      <td mat-cell *matCellDef="let row"> {{((row || {}).type || {}).name}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="location">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Location </th>
-      <td mat-cell *matCellDef="let row"> {{((row || {}).location || {}).name}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="order">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Order </th>
-      <td mat-cell *matCellDef="let row"> <mat-checkbox [disabled]="true" [checked]="row.activeTransportOrder | isTOActive "></mat-checkbox> </td>
-    </ng-container>
-
-    <ng-container matColumnDef="error">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Error </th>
-      <td mat-cell *matCellDef="let row"> <mat-checkbox [disabled]="true" [checked]="row.location.hasTu"></mat-checkbox></td>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+      <td mat-cell *matCellDef="let row">
+        <service-status [status]='"running"'></service-status>
+      </td>
     </ng-container>
   <!-- END COLUMN DEFINITION -->
 
-  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-  <ng-container matColumnDef="expandedDetail">
-    <td mat-cell class="detail" *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
-      <div class="example-element-detail"
-           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-           <button mat-raised-button>Jump to 'Location Dialog'</button>
-           <button mat-raised-button>Jump to 'TransportOrder Dialog'</button>
-           <button mat-raised-button color="primary">View more Details</button>
-      </div>
-    </td>
-  </ng-container>
-
   <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
-  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
-      class="example-element-row"
-      [class.example-expanded-row]="expandedElement === element"
-      (click)="expandedElement = expandedElement === element ? null : element">
+  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;">
   </tr>
-  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>
 <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
 </div>

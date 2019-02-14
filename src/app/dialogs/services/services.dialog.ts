@@ -1,6 +1,6 @@
 import { AppTitleService } from './../../services/app-title.service';
 import { TransportUnitService } from './../../services/transport-unit.service';
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterContentInit } from '@angular/core';
 import { TransportUnit } from '../../objects/transport-unit';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -20,19 +20,17 @@ import {Location} from '@angular/common';
     ]),
   ],
 })
-export class ServicesDialog implements OnInit {
+export class ServicesDialog implements OnInit, AfterContentInit {
   /* Load Elements from Template */
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   /* Data for Template */
   dataSource: MatTableDataSource<TransportUnit>;
-  columnsToDisplay = ['name', 'type', 'location', 'order', 'error'];
-  expandedElement: TransportUnit | null;
+  columnsToDisplay = ['name', 'status'];
   maxItems: number;
   searchValue: string;
   filter: string;
-  panelOpenState = false;
   mode = 'indeterminate';
 
   /* Inject the Service */
@@ -72,7 +70,6 @@ export class ServicesDialog implements OnInit {
     this._tuService.getAllTransportUnits(filter).subscribe(data => {
       this.dataSource.data = data;
       this.mode = 'determinate';
-
     });
     this._tuService.getAllTransportUnitsCount(filter).subscribe(data => this.maxItems = data);
   }
@@ -92,5 +89,15 @@ export class ServicesDialog implements OnInit {
     this.location.replaceState('transport-units/' + filter);
     this.loadData(filter);
     this.dataSource.paginator.firstPage();
+  }
+
+  /**
+   * Bugfix: https://stackoverflow.com/questions/43375532/expressionchangedafterithasbeencheckederror-explained
+   * setTimeout() ist needed to avoid error on changing parents data over service
+   */
+  ngAfterContentInit(): void {
+    setTimeout(() => {
+      this._appTitleService.setDetailsView(false);
+    }, 0);
   }
 }

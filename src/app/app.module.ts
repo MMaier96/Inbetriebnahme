@@ -23,6 +23,8 @@ import { HasAnyToErrorPipe } from './pipes/has-any-to-error.pipe';
 import { LocationsDialog } from './dialogs/locations/locations.dialog';
 import { ControllerDialog } from './dialogs/controller/controller.dialog';
 import { ServicesDialog } from './dialogs/services/services.dialog';
+import { ServiceStatusComponent } from './components/service-status/service-status.component';
+import { ServiceStatusColorPipe } from './pipes/service-status-color.pipe';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { ServicesDialog } from './dialogs/services/services.dialog';
     IsTOActivePipe,
     LoginDialog,
     TransportUnitDetails,
-    HasAnyToErrorPipe
+    HasAnyToErrorPipe,
+    ServiceStatusComponent,
+    ServiceStatusColorPipe
   ],
   imports: [
     BrowserModule,
