@@ -94,4 +94,8 @@ export class MainComponent implements OnDestroy, OnInit, AfterContentInit {
     snav.toggle();
     this.appTitle = item.name;
   }
+
+  reload(): void {
+    location.reload();
+  }
 }
