@@ -2,12 +2,52 @@
   <h2>Direct Properties</h2>
   <table>
     <tr>
-      <td>ID:</td>
-      <td>{{ tu.id }}</td>
+      <td>Id:</td>
+      <td>{{ tu?.id }}</td>
     </tr>
     <tr>
       <td>Name:</td>
-      <td>{{ tu.name }}</td>
+      <td>{{ tu?.name }}</td>
+    </tr>
+    <tr>
+      <td>Location:</td>
+      <td>{{ tu?.locationLabel }}</td>
+    </tr>
+    <tr>
+      <td>Empty:</td>
+      <td>{{ tu?.empty }}</td>
+    </tr>
+    <tr>
+      <td>EmptyStack:</td>
+      <td>{{ tu?.emptyStack }}</td>
+    </tr>
+    <tr>
+      <td>HasActiveTO:</td>
+      <td>{{ tu?.hasActiveTo }}</td>
+    </tr>
+    <tr>
+      <td>lastMovementReason:</td>
+      <td>{{ tu?.lastDc2AmMovementBookingReason }}</td>
+    </tr>
+    <tr>
+      <td>lastBookingTime:</td>
+      <td>{{ tu?.lastLocationBookingTime }}</td>
+    </tr>
+    <tr>
+      <td>RoutingPoint:</td>
+      <td>{{ tu?.routingPoint }}</td>
+    </tr>
+    <tr>
+      <td>SocOrderInfo:</td>
+      <td>{{ tu?.socOrderInfo }}</td>
+    </tr>
+    <tr>
+      <td>SuperTU:</td>
+      <td>{{ tu?.superTu?.name }}</td>
+    </tr>
+    <tr>
+      <td>Weight:</td>
+      <td>{{ tu?.weight }}</td>
     </tr>
   </table>
   <h2>Nested Properties</h2>
@@ -15,25 +55,21 @@
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
-              Type
+              Cubature
           </mat-panel-title>
         </mat-expansion-panel-header>
         <table>
           <tr>
-            <td>ID:</td>
-            <td>{{ tu.type.id }}</td>
+            <td>Heigth:</td>
+            <td>{{ tu.cubature.heigth }}</td>
           </tr>
           <tr>
-            <td>Name:</td>
-            <td>{{ tu.type.name }}</td>
+            <td>Length:</td>
+            <td>{{ tu.cubature.length }}</td>
           </tr>
           <tr>
-            <td>SOC ID:</td>
-            <td>{{ tu.type.typeSocId }}</td>
-          </tr>
-          <tr>
-            <td>Name:</td>
-            <td>{{ tu.location.name }}</td>
+            <td>Width:</td>
+            <td>{{ tu.cubature.width }}</td>
           </tr>
         </table>
       </mat-expansion-panel>
@@ -41,57 +77,37 @@
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
-                Location
+                TransportUnitType
             </mat-panel-title>
           </mat-expansion-panel-header>
 
           <table>
               <tr>
                 <td>ID:</td>
-                <td>{{ tu.location.id }}</td>
-              </tr>
-              <tr>
-                <td>Description:</td>
-                <td>{{ tu.location.description }}</td>
-              </tr>
-              <tr>
-                <td>HostName:</td>
-                <td>{{ tu.location.hostName }}</td>
+                <td>{{ tu.type.id }}</td>
               </tr>
               <tr>
                 <td>Name:</td>
-                <td>{{ tu.location.name }}</td>
+                <td>{{ tu.type.name }}</td>
+              </tr>
+              <tr>
+                <td>SocId:</td>
+                <td>{{ tu.type.typeSocId }}</td>
               </tr>
             </table>
         </mat-expansion-panel>
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                  TransportOrders
+                  ErrorCodes
               </mat-panel-title>
             </mat-expansion-panel-header>
 
-            <div *ngFor="let to of tu.transportOrders; index as i">
-              Order #{{i}}
             <table>
-              <tr>
-                <td>ID:</td>
-                <td>{{ to?.id }}</td>
-              </tr>
-              <tr>
-                <td>nextTarget:</td>
-                <td>{{ to?.nextTarget?.name }}</td>
-              </tr>
-              <tr>
-                <td>isActive:</td>
-                <td>{{ to?.isActive }}</td>
-              </tr>
-              <tr>
-                <td>Error:</td>
-                <td>{{ to?.error }}</td>
+              <tr *ngFor="let error of tu.errorCodes; index as i">
+                <td>{{ error }}</td>
               </tr>
             </table>
-            </div>
           </mat-expansion-panel>
         </mat-accordion>
 </div>

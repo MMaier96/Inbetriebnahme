@@ -1,3 +1,6 @@
+@import '../../../device-definitions';
+
+/* For all Devices*/
 .mat-elevation-z8 {
   box-shadow: 0 3px 5px -3px rgba(0, 0, 0, 0.2), -1px -3px 2px -3px rgba(0, 0, 0, 0.2);
 }
@@ -87,6 +90,7 @@ mat-paginator{
 td.detail.mat-cell {
   padding: 0px;
 }
+
 
 @media (max-width: 455px) {
   .example-container {

@@ -45,13 +45,14 @@ export class MainComponent implements OnDestroy, OnInit, AfterContentInit {
     name: 'Services',
     icon: './assets/icons/dark/services.svg'
   }];
+
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     public _appTitleService: AppTitleService,
     private route: ActivatedRoute
   ) {
-    this.mobileQuery = media.matchMedia('(max-width: 800px)');
+    this.mobileQuery = media.matchMedia('(max-width: 1023px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }

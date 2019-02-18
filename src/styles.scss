@@ -1,35 +1,87 @@
 /* Material Theme */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "device-definitions";
 
-/* GLOBAL STYLES */
+/* Small Phones */
+@include respond-below(small_phone) {
+
+}
+
+/* Medium Phones */
+@include respond-above(small_phone) {
+
+}
+
+/* Large Phones */
+@include respond-above(medium_phone) {
+  img.logo {
+    display: block !important;
+  }
+}
+
+/* Tablets */
+@include respond-above(large_phone) {
+  .mat-expansion-panel-body .mat-raised-button {
+    display: block;
+    min-width: auto !important;
+    margin: 0px auto 21px;
+  }
+
+  .mat-sidenav {
+    top: 35px !important;
+  }
+}
+
+/* Laptops */
+@include respond-above(tablet) {
+
+}
+
+/* Desktop */
+@include respond-above(laptop) {
+
+}
+
+/* For all Devices*/
+
+body {
+  margin: 0px !important;
+}
+
 img.icon {
   width: 33px;
   padding-right: 10px;
 }
+
 a[mat-list-item]{
   margin-right: 10px;
 }
-body {
-  margin: 0px !important;
-}
+
 .mat-drawer-container {
   background-color: #fff;
-  color: rgba(0,0,0,.87);
 }
-@media (min-width: 600px){
-  .mat-toolbar-row, .mat-toolbar-single-row {
-    height: 56px !important;
-  }
+
+.mat-drawer-content {
+  padding-top: 14px !important;
 }
-.mat-toolbar-multiple-rows {
-  min-height: 56px !important;
+
+.mat-toolbar-row, .mat-toolbar-multiple-rows, .mat-toolbar-single-row {
+  height: 56px !important;
 }
+
+img.logo {
+  display: none;
+}
+
+.mat-sidenav {
+  top: 56px;
+}
+
 .mat-progress-bar {
   position: fixed !important;
   bottom: 0px;
   z-index: 9999;
 }
-
 
 mat-accordion.action-bar.mat-accordion {
   position: fixed;
@@ -42,6 +94,7 @@ mat-accordion.action-bar.mat-accordion {
 mat-accordion.action-bar .mat-expansion-indicator::after, .mat-expansion-panel-header-description {
   color: rgba(255,255,255,.54);
 }
+
 mat-accordion.action-bar .mat-expansion-panel-header-title {
   color: rgba(255,255,255,.87);
 }
@@ -51,10 +104,8 @@ mat-accordion.action-bar mat-expansion-panel.mat-expansion-panel {
   padding: 0px 35px 0px !important;
 }
 
-@media (hover: none){
-  mat-accordion.action-bar .mat-expansion-panel:not(.mat-expanded):not([aria-disabled=true]) .mat-expansion-panel-header:hover {
-    background: #3f51b5;
-  }
+mat-accordion.action-bar .mat-expansion-panel:not(.mat-expanded):not([aria-disabled=true]) .mat-expansion-panel-header:hover {
+  background: #3f51b5;
 }
 
 mat-accordion.action-bar .mat-expansion-panel-header{
@@ -62,20 +113,19 @@ mat-accordion.action-bar .mat-expansion-panel-header{
   margin-bottom: 4px;
   padding: 0px 0px !important;
 }
+
 mat-accordion.action-bar .mat-expansion-panel{
   margin: 8px 0px !important;
 }
+
 mat-accordion.action-bar.mat-accordion .mat-expansion-panel:first-of-type {
   border-top-right-radius: 0px !important;
   border-top-left-radius: 0px !important;
 }
+
 mat-accordion.action-bar.mat-accordion .mat-expansion-panel:last-of-type {
   border-bottom-right-radius: 105px !important;
   border-bottom-left-radius: 0px !important;
-}
-
-.mat-drawer-content {
-  padding-top: 14px !important;
 }
 
 .mat-expansion-panel-header-description, .mat-expansion-panel-header-title {
@@ -86,38 +136,17 @@ mat-accordion.action-bar.mat-accordion .mat-expansion-panel:last-of-type {
   height: 18px;
 }
 
-@media (max-width: 455px){
-  img.logo {
-    display: none;
-  }
-
-  .mat-expansion-panel-body .mat-raised-button {
-    display: block;
-    min-width: 90% !important;
-    margin: 0px auto 21px;
-  }
-}
-@media (min-width: 455px){
-
-  .mat-expansion-panel-body .mat-raised-button {
-    display: block;
-    min-width: 90% !important;
-    margin: 0px auto 21px;
-  }
+.mat-expansion-panel-body .mat-raised-button {
+  display: block;
+  min-width: 90% !important;
+  margin: 0px auto 21px;
 }
 
 .mat-expansion-panel-body {
   padding-top: 15px !important;
 }
 
-@media (min-width: 600px) {
-  .mat-expansion-panel-body .mat-raised-button {
-    display: block;
-    min-width: auto !important;
-    margin: 0px auto 21px;
-  }
-}
-
+/* TODO: extract to own component*/
 .mat-radio-button[color="green"] .mat-radio-inner-circle {
   background: #27c727 !important;
 }
@@ -128,6 +157,7 @@ mat-accordion.action-bar.mat-accordion .mat-expansion-panel:last-of-type {
 .mat-radio-button[color="red"] .mat-radio-inner-circle {
   background: red !important;
 }
+
 .mat-radio-button[color="red"] .mat-radio-outer-circle {
   border-color: red !important;
 }
@@ -136,6 +166,8 @@ mat-accordion.action-bar.mat-accordion .mat-expansion-panel:last-of-type {
   background: orange !important;
 }
 .mat-radio-button[color="orange"] .mat-radio-outer-circle {
-  border-color: orange !important;
+    border-color: orange !important;
 }
-
+.mat-drawer.mat-drawer-side {
+    z-index: 1 !important;
+}

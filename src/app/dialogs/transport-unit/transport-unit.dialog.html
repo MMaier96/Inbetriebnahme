@@ -36,9 +36,6 @@
 
       <!-- Action Buttons -->
         <button mat-raised-button>Create TransportUnit</button>
-        <button mat-raised-button>Delete TransportUnit</button>
-        <button mat-raised-button>Action 3</button>
-        <button mat-raised-button>Action 4</button>
 
     </mat-expansion-panel>
   </mat-accordion>
@@ -66,19 +63,19 @@
         <!-- 'LOCATION' Column -->
           <ng-container matColumnDef="location">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Location </th>
-            <td mat-cell *matCellDef="let row"> {{row?.location?.name}} </td>
+            <td mat-cell *matCellDef="let row"> {{row?.locationLabel}} </td>
           </ng-container>
 
         <!-- 'ORDER' Column -->
           <ng-container matColumnDef="order">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Order </th>
-            <td mat-cell *matCellDef="let row"> <mat-checkbox [disabled]="true" [checked]="row.activeTransportOrder | isTOActive "></mat-checkbox> </td>
+            <td mat-cell *matCellDef="let row"> <mat-checkbox [disabled]="true" [checked]="row?.hasActiveTo "></mat-checkbox> </td>
           </ng-container>
 
         <!-- 'ERROR' Column -->
           <ng-container matColumnDef="error">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Error </th>
-            <td mat-cell *matCellDef="let row"> <mat-checkbox [disabled]="true" [checked]="row.transportOrders | hasAnyToError"></mat-checkbox></td>
+            <td mat-cell *matCellDef="let row"> <mat-checkbox [disabled]="true" [checked]="row?.errorCodes"></mat-checkbox></td>
           </ng-container>
 
         <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->

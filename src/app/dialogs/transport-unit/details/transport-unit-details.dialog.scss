@@ -1,19 +1,35 @@
+*{
+  font: 500 1em Roboto,"Helvetica Neue",sans-serif;
+}
 
 div {
   padding: 5px 25px;
 }
+
 tr td:first-child{
   width: 100px;
 }
-h3{
-  padding-left: 10px;
-}
+
+
 h2{
+  font-size: 1.25em;
+}
+
+h2:not(:first-child) {
   margin-top: 50px;
 }
 table {
   margin-left: 20px;
   padding-left: 10px;
+}
+
+table td {
+  vertical-align: top;
+  padding: 5px 0px;
+}
+
+table tr {
+  margin: 5px 0px;
 }
 
 h3 + table {

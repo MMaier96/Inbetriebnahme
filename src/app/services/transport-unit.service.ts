@@ -26,20 +26,13 @@ export class TransportUnitService {
         name: "%` + filter + `%",
         first: 0
       ) {
-        id
         name
         type {
           name
         }
-        location{
-          name
-        }
-        transportOrders {
-          error
-        }
-        activeTransportOrder {
-          isActive
-        }
+        locationLabel
+        hasActiveTo
+        errorCodes
       }
     }`
     }, httpOptions).pipe(
@@ -66,30 +59,29 @@ export class TransportUnitService {
         name: "` + tuName + `",
         first: 0
       ) {
+        cubature {
+          height
+          length
+          weight
+        }
+        empty
+        emptyStack
+        errorCodes
+        hasActiveTo
         id
+        lastDc2AmMovementBookingReason
+        lastLocationBookingTime
+        locationLabel
         name
+        routingPoint
+        socOrderInfo
+        superTu {
+          id
+        }
         type {
           id
-          name
-          typeSocId
         }
-        location{
-          id
-          name
-          hostName
-          description
-        }
-        transportOrders {
-          id
-          nextTarget {
-            name
-          }
-          isActive
-          error
-        }
-        activeTransportOrder {
-          isActive
-        }
+        weight
       }
     }`
     }, httpOptions).pipe(
