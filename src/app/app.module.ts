@@ -28,6 +28,8 @@ import { ServicesDialog } from './dialogs/services/services.dialog';
 import { ServiceStatusComponent } from './components/service-status/service-status.component';
 import { ServiceStatusColorPipe } from './pipes/service-status-color.pipe';
 import { ServicesService } from './services/services.service';
+import { ExternalDialogLink } from './components/external-dialog-link/external-dialog-link';
+import { TruncPipe } from './pipes/trunc.pipe';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { ServicesService } from './services/services.service';
     TransportOrderDetails,
     HasAnyToErrorPipe,
     ServiceStatusComponent,
-    ServiceStatusColorPipe
+    ServiceStatusColorPipe,
+    ExternalDialogLink,
+    TruncPipe
   ],
   imports: [
     BrowserModule,

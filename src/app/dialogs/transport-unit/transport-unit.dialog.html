@@ -82,9 +82,14 @@
           <ng-container matColumnDef="expandedDetail">
             <td mat-cell class="detail" *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
               <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+              <external-dialog-link icon="open_in_new" name="Location Dialog"></external-dialog-link>
+              <external-dialog-link icon="open_in_new" name="TransportOrder Dialog"></external-dialog-link>
+              <external-dialog-link icon="info_outline" name="Details Dialog" [routerLink]="'details/' + element.name"></external-dialog-link>
+                <!--
                 <button mat-raised-button>Jump to 'Location Dialog'</button>
                 <button mat-raised-button>Jump to 'TransportOrder Dialog'</button>
-                <button mat-raised-button color="primary" [routerLink]="'details/' + element.name">View more Details</button>
+                <button mat-raised-button color="primary" >View more Details</button>
+              -->
               </div>
             </td>
           </ng-container>
@@ -104,6 +109,15 @@
     </table>
 
   <!-- Pagination -->
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
 
+    <mat-paginator [pageSizeOptions]="[5]" hidePageSize showFirstLastButtons></mat-paginator>
+    <div style="position: fixed;
+    bottom: 0px;
+    z-index: 9999;
+    width: 100%;
+    text-align: center;
+    font: 500 0.8em Roboto,'Helvetica Neue',sans-serif;
+    color: white;">
+      Page {{paginator.pageIndex + 1}} of {{paginator.getNumberOfPages() + 1 | trunc}}
+    </div>
 </div>

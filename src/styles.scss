@@ -67,6 +67,8 @@ a[mat-list-item]{
 
 .mat-toolbar-row, .mat-toolbar-multiple-rows, .mat-toolbar-single-row {
   height: 56px !important;
+  min-height: 56px !important;
+  max-height: 56px !important;
 }
 
 img.logo {

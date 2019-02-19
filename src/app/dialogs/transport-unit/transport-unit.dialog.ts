@@ -1,6 +1,6 @@
 import { AppTitleService } from './../../services/app-title.service';
 import { TransportUnitService } from './../../services/transport-unit.service';
-import { Component, ViewChild, OnInit, AfterContentInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterContentInit, ViewEncapsulation } from '@angular/core';
 import { TransportUnit } from '../../objects/transport-unit';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
   selector: 'transport-unit-dialog',
   styleUrls: ['transport-unit.dialog.scss'],
   templateUrl: 'transport-unit.dialog.html',
+  encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({height: '0px', minHeight: '0', display: 'none'})),
