@@ -78,7 +78,7 @@ th.mat-header-cell {
 }
 mat-paginator{
   position: fixed;
-  bottom: 0px;
+  bottom: 10px !important;
   left: 0px;
   width: 100%;
   max-height: 95px;
@@ -124,7 +124,7 @@ svg.mat-paginator-icon {
     margin: 0px auto 21px;
   }
   mat-form-field {
-    display: block;
+    display: block !important;
     width: 80%;
     margin: 0px auto 0px;
     padding-top: 1em;
