@@ -1,12 +1,20 @@
 import { TransportOrderTarget } from './transport-order-target';
-import { TransportOrderType } from './transport-order.type';
 import { TransportOrderError } from './transport-order-error';
 
 export interface TransportOrder {
-  name: string;
-  type: TransportOrderType;
-  isActive: boolean;
+  active: boolean;
+  age: number;
+  createdOnLocation: Location;
+  currentLocation: Location;
   error: TransportOrderError;
-  nextTarget: TransportOrderTarget;
+  errorReason: String;
+  finished: boolean;
+  id: number;
+  locationFoundByStorageSearch: String;
+  nextTarget: Location;
+  priority: number;
   targets: TransportOrderTarget[];
+  transportUnitName: string;
+  type: string;
+  waitingFor: string;
 }

@@ -1,26 +1,32 @@
 <mat-progress-bar *ngIf="mode === 'indeterminate'" [mode]="mode"></mat-progress-bar>
-<mat-form-field>
-  <input #filterinput matInput type="text" placeholder="Search for any value ..." [value]="filter">
-  <button mat-button *ngIf="filterinput.value" matSuffix mat-icon-button aria-label="Clear" (click)="filterinput.value=''">
-    <mat-icon>close</mat-icon>
-  </button>
-</mat-form-field>
-<button mat-raised-button color="primary" (click)="search(filterinput.value)">Search</button>
-
 <div class="example-container mat-elevation-z8">
-<table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+<table mat-table [dataSource]="dataSource" multiTemplateDataRows>
 
   <!-- START COLUMN DEFINITION -->
     <ng-container matColumnDef="name" sticky>
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+      <th mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let row"> {{row?.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+      <th mat-header-cell *matHeaderCellDef> Status </th>
       <td mat-cell *matCellDef="let row">
-        <service-status [status]='"running"'></service-status>
+        <service-status [status]='row?.runtimeState'></service-status>
       </td>
+    </ng-container>
+    <ng-container matColumnDef="daemon" sticky>
+      <th mat-header-cell *matHeaderCellDef> Daemon </th>
+      <td mat-cell *matCellDef="let row"> {{row?.daemonState}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="start" sticky>
+      <th mat-header-cell *matHeaderCellDef> Start </th>
+      <td mat-cell *matCellDef="let row"> {{row?.lastStart}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="stop" sticky>
+      <th mat-header-cell *matHeaderCellDef> Stop </th>
+      <td mat-cell *matCellDef="let row"> {{row?.lastStop}} </td>
     </ng-container>
   <!-- END COLUMN DEFINITION -->
 
@@ -28,5 +34,4 @@
   <tr mat-row *matRowDef="let element; columns: columnsToDisplay;">
   </tr>
 </table>
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
 </div>

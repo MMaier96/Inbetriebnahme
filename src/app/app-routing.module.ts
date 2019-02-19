@@ -1,3 +1,4 @@
+import { TransportOrderDetails } from './dialogs/transport-order/details/transport-order-details.dialog';
 import { ServicesDialog } from './dialogs/services/services.dialog';
 import { ControllerDialog } from './dialogs/controller/controller.dialog';
 import { LocationsDialog } from './dialogs/locations/locations.dialog';
@@ -17,6 +18,8 @@ const routes: Routes = [
   { path: 'transport-units/details/:tuName', component: TransportUnitDetails },
   { path: 'transport-units/:filter', component: TransportUnitDialog },
   { path: 'transport-orders', component: TransportOrderDialog },
+  { path: 'transport-orders/details/:toName', component: TransportOrderDetails },
+  { path: 'transport-orders/:filter', component: TransportOrderDialog },
   { path: 'services', component: ServicesDialog }
 ];
 

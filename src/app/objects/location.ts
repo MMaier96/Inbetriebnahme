@@ -1,7 +1,14 @@
+import { LocationGroup } from './location-group';
+
 export interface Location {
-  name: string;
-  hostName: string;
+  compartmentRegion: string;
   description: string;
-  hasLocks: boolean;
-  hasTu: boolean;
+  hostName: string;
+  id: number;
+  locationGroups: LocationGroup[];
+  locked: boolean;
+  name: string;
+  routingPoint: string;
+  socName: string;
+  storageLocation: boolean;
 }

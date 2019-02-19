@@ -3,7 +3,10 @@ import { LocationGroup } from './location-group';
 import { Location } from './location';
 
 export interface TransportOrderTarget {
-  transportOrder: TransportOrder;
+  finished: boolean;
+  id: number;
   location: Location;
   locationGroup: LocationGroup;
+  name: string;
+  transportOrder: TransportOrder;
 }

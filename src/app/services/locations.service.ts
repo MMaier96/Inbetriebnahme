@@ -2,8 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { TransportUnit } from '../objects/transport-unit';
 import { GraphQLResponse } from '../objects/graphql-response';
-import { TransportOrder } from '../objects/transport-order';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -12,33 +12,33 @@ const httpOptions = {
 };
 
 @Injectable()
-export class TransportOrderService {
+export class LocationService {
 
   /* Inject the HTTP Client */
   constructor( private http: HttpClient) { }
 
-  getAllTransportOrders(filter?: string): Observable<TransportOrder[]> {
+  getAllLocations(filter?: string): Observable<TransportUnit[]> {
     filter = filter || '';
     return this.http.post<GraphQLResponse>('/query', {
       query: `{
-        transportOrders {
-          active
-          currentLocation {
-            name
-          }
-          error
-          nextTarget {
-            name
-          }
-          transportUnitName
-        }
-      }`
+        locations(
+        offset: 50,
+        name: "%` + filter + `%",
+        first: 0
+      ) {
+        name
+        storageLocation
+        hostName
+        socName
+        locked
+      }
+    }`
     }, httpOptions).pipe(
-      map( response => response.data.transportOrders as TransportOrder[])
+      map( response => response.data.locations)
     );
   }
 
-  getAllTransportOrdersCount(filter?: string): Observable<number> {
+  getAllLocationsCount(filter?: string): Observable<number> {
     filter = filter || '';
     return this.http.post<GraphQLResponse>('/query', {
       query: `{
@@ -49,7 +49,7 @@ export class TransportOrderService {
     );
   }
 
-  getTransportOrderByName(tuName: string) {
+  getLocationByName(tuName: string) {
     return this.http.post<GraphQLResponse>('/query', {
       query: `{
         transportUnits(

@@ -154,6 +154,13 @@ mat-accordion.action-bar.mat-accordion .mat-expansion-panel:last-of-type {
   border-color: #27c727 !important;
 }
 
+.mat-radio-button[color="grey"] .mat-radio-inner-circle {
+  background: #9e9e9e !important;
+}
+.mat-radio-button[color="grey"] .mat-radio-outer-circle {
+  border-color: #9e9e9e !important;
+}
+
 .mat-radio-button[color="red"] .mat-radio-inner-circle {
   background: red !important;
 }

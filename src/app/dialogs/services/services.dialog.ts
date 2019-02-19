@@ -1,12 +1,9 @@
 import { AppTitleService } from './../../services/app-title.service';
-import { TransportUnitService } from './../../services/transport-unit.service';
-import { Component, ViewChild, OnInit, AfterContentInit } from '@angular/core';
-import { TransportUnit } from '../../objects/transport-unit';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { Component, OnInit, AfterContentInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ActivatedRoute } from '@angular/router';
-
-import {Location} from '@angular/common';
+import { ServicesService } from 'src/app/services/services.service';
+import { Service } from 'src/app/objects/service';
 
 @Component({
   selector: 'services-dialog',
@@ -21,74 +18,30 @@ import {Location} from '@angular/common';
   ],
 })
 export class ServicesDialog implements OnInit, AfterContentInit {
-  /* Load Elements from Template */
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-
   /* Data for Template */
-  dataSource: MatTableDataSource<TransportUnit>;
-  columnsToDisplay = ['name', 'status'];
+  dataSource: MatTableDataSource<Service>;
+  columnsToDisplay = ['name', 'status', 'daemon', 'start', 'stop'];
   maxItems: number;
-  searchValue: string;
-  filter: string;
   mode = 'indeterminate';
 
   /* Inject the Service */
   constructor(
-    private _tuService: TransportUnitService,
+    private _servicesService: ServicesService,
     private _appTitleService: AppTitleService,
-    private route: ActivatedRoute,
-    private location: Location) { }
+  ) { }
 
   /* Lifcycle-Hook onCreation */
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.filter = params.get('filter');
-    });
-    this.dataSource = new MatTableDataSource<TransportUnit>();
-    this.loadData(this.filter);
-    this.dataSource.paginator = this.paginator;
-    this.paginator.getNumberOfPages = () => this.maxItems / this.paginator.pageSize;
-    this.dataSource.sortingDataAccessor = (item, property) => {
-
-      switch (property) {
-        /* nested properties of item */
-        case 'type': return item.type.name;
-        case 'location': return item.location.name;
-        case 'order': return item.activeTransportOrder.isActive;
-        case 'error': return item.location.hasTu;
-
-        /* direct properties of item */
-        default: return item[property];
-      }
-    };
-    this.dataSource.sort = this.sort;
+    this.dataSource = new MatTableDataSource<Service>();
+    this.loadData();
   }
 
   /* Load data from Service */
-  loadData(filter?: string) {
-    this._tuService.getAllTransportUnits(filter).subscribe(data => {
+  loadData() {
+    this._servicesService.getAllServices().subscribe(data => {
       this.dataSource.data = data;
       this.mode = 'determinate';
     });
-    this._tuService.getAllTransportUnitsCount(filter).subscribe(data => this.maxItems = data);
-  }
-
-  /* Filter Function */
-  applyFilter(filterValue: string) {
-    /* Set Filter String to DataSource */
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    /* Reset the Paginator Page */
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  search(filter) {
-    this.location.replaceState('transport-units/' + filter);
-    this.loadData(filter);
-    this.dataSource.paginator.firstPage();
   }
 
   /**

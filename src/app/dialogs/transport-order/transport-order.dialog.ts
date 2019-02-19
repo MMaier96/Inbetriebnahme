@@ -1,9 +1,9 @@
 import { AppTitleService } from './../../services/app-title.service';
-import { TransportUnitService } from './../../services/transport-unit.service';
 import { Component, ViewChild, OnInit, AfterContentInit } from '@angular/core';
-import { TransportUnit } from '../../objects/transport-unit';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { TransportOrder } from 'src/app/objects/transport-order';
+import { TransportOrderService } from 'src/app/services/transport-order.service';
 
 
 @Component({
@@ -24,19 +24,19 @@ export class TransportOrderDialog implements OnInit, AfterContentInit {
   @ViewChild(MatSort) sort: MatSort;
 
   /* Data for Template */
-  dataSource: MatTableDataSource<TransportUnit>;
-  columnsToDisplay = ['name', 'type', 'location', 'order', 'error'];
-  expandedElement: TransportUnit | null;
+  dataSource: MatTableDataSource<TransportOrder>;
+  columnsToDisplay = ['tuName', 'location', 'nextTarget', 'active', 'error'];
+  expandedElement: TransportOrder | null;
 
   /* Inject the Service */
   constructor(
-    private _tuService: TransportUnitService,
+    private _tuService: TransportOrderService,
     private _appTitleService: AppTitleService,
     ) { }
 
   /* Lifcycle-Hook onCreation */
   ngOnInit() {
-    this.dataSource = new MatTableDataSource<TransportUnit>();
+    this.dataSource = new MatTableDataSource<TransportOrder>();
     this.loadData();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -44,7 +44,7 @@ export class TransportOrderDialog implements OnInit, AfterContentInit {
 
   /* Load data from Service */
   loadData() {
-    this._tuService.getAllTransportUnits().subscribe(data => {
+    this._tuService.getAllTransportOrders().subscribe(data => {
       this.dataSource.data = data;
     });
   }

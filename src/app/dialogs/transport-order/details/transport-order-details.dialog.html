@@ -1,0 +1,115 @@
+<div *ngFor="let tu of tuData | async">
+  <h2>Direct Properties</h2>
+  <table>
+    <tr>
+      <td>Id:</td>
+      <td>{{ tu?.id }}</td>
+    </tr>
+    <tr>
+      <td>Name:</td>
+      <td>{{ tu?.name }}</td>
+    </tr>
+    <tr>
+      <td>Location:</td>
+      <td>{{ tu?.locationLabel }}</td>
+    </tr>
+    <tr>
+      <td>Empty:</td>
+      <td>{{ tu?.empty }}</td>
+    </tr>
+    <tr>
+      <td>EmptyStack:</td>
+      <td>{{ tu?.emptyStack }}</td>
+    </tr>
+    <tr>
+      <td>HasActiveTO:</td>
+      <td>{{ tu?.hasActiveTo }}</td>
+    </tr>
+    <tr>
+      <td>lastMovementReason:</td>
+      <td>{{ tu?.lastDc2AmMovementBookingReason }}</td>
+    </tr>
+    <tr>
+      <td>lastBookingTime:</td>
+      <td>{{ tu?.lastLocationBookingTime }}</td>
+    </tr>
+    <tr>
+      <td>RoutingPoint:</td>
+      <td>{{ tu?.routingPoint }}</td>
+    </tr>
+    <tr>
+      <td>SocOrderInfo:</td>
+      <td>{{ tu?.socOrderInfo }}</td>
+    </tr>
+    <tr>
+      <td>SuperTU:</td>
+      <td>{{ tu?.superTu?.name }}</td>
+    </tr>
+    <tr>
+      <td>Weight:</td>
+      <td>{{ tu?.weight }}</td>
+    </tr>
+  </table>
+  <h2>Nested Properties</h2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+              Cubature
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <table>
+          <tr>
+            <td>Heigth:</td>
+            <td>{{ tu.cubature.heigth }}</td>
+          </tr>
+          <tr>
+            <td>Length:</td>
+            <td>{{ tu.cubature.length }}</td>
+          </tr>
+          <tr>
+            <td>Width:</td>
+            <td>{{ tu.cubature.width }}</td>
+          </tr>
+        </table>
+      </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                TransportUnitType
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <table>
+              <tr>
+                <td>ID:</td>
+                <td>{{ tu.type.id }}</td>
+              </tr>
+              <tr>
+                <td>Name:</td>
+                <td>{{ tu.type.name }}</td>
+              </tr>
+              <tr>
+                <td>SocId:</td>
+                <td>{{ tu.type.typeSocId }}</td>
+              </tr>
+            </table>
+        </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                  ErrorCodes
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <table>
+              <tr *ngFor="let error of tu.errorCodes; index as i">
+                <td>{{ error }}</td>
+              </tr>
+            </table>
+          </mat-expansion-panel>
+        </mat-accordion>
+</div>
+
+

@@ -1,18 +1,21 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ArgumentOutOfRangeError } from 'rxjs';
+import { ServiceRuntimeState } from '../objects/service-runtime-state';
 
 @Pipe({
   name: 'serviceStatusColorPipe'
 })
 export class ServiceStatusColorPipe implements PipeTransform {
 
-  transform(value: string): string {
+  transform(value: ServiceRuntimeState): string {
+    console.log(ServiceRuntimeState.INITIALIZING);
     switch (value) {
-      case 'running': return 'green';
-      case 'error': return 'red';
-      case 'warning': return 'orange';
-      case 'stopped': return 'grey';
-      default: return 'grey';
+      case ServiceRuntimeState.INITIALIZING: return 'green';
+      case ServiceRuntimeState.NOT_RUNNING: return 'grey';
+      case ServiceRuntimeState.RUNNING: return 'green';
+      case ServiceRuntimeState.STARTING: return 'green';
+      case ServiceRuntimeState.STOPPING: return 'red';
+      case ServiceRuntimeState.UNKNOWN: return 'red';
     }
   }
 
