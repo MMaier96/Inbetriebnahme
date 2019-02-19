@@ -110,16 +110,8 @@
 
   <!-- Pagination -->
 
-    <mat-paginator [pageSizeOptions]="[5]" hidePageSize showFirstLastButtons></mat-paginator>
-    <div style="position: fixed;
-    bottom: 0px;
-    z-index: 9999;
-    width: 100%;
-    text-align: center;
-    font: 500 0.8em Roboto,'Helvetica Neue',sans-serif;
-    color: #ffffffab;
-    background: #3f51b5;
-    padding-bottom:5px">
-      Page {{paginator.pageIndex + 1}} of {{paginator.getNumberOfPages() + 1 | trunc}}
+    <mat-paginator (page)="pageChange($event)" [pageSizeOptions]="[pageSize]" hidePageSize></mat-paginator>
+    <div class="paginator-page">
+      Page {{pageIndex + 1 | trunc}} of {{paginator.getNumberOfPages() + 1 | trunc}}
     </div>
 </div>

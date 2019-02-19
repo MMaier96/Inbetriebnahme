@@ -6,6 +6,7 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { environment } from 'src/environments/environment.prod';
 
 /* Metadata of the Component */
 @Component({
@@ -36,9 +37,12 @@ export class TransportUnitDialog implements OnInit, AfterContentInit {
     expandedElement: TransportUnit | null;
     filter: string;
     maxItems: number;
+    pageSize = environment.defaultPageSize;
     panelOpenState = false;
     queryMode = 'indeterminate';
     searchValue: string;
+    pageIndex = 0;
+    paginatorOldPageIndex = 0;
 
   /* Inject the Service */
     constructor(
@@ -59,6 +63,8 @@ export class TransportUnitDialog implements OnInit, AfterContentInit {
     this.loadData();
     this.dataSource.paginator = this.paginator;
     this.paginator.getNumberOfPages = () => this.maxItems / this.paginator.pageSize;
+    this.paginator.hasNextPage = () => (this.pageIndex * this.pageSize ) + this.pageSize <= this.maxItems;
+    this.paginator.hasPreviousPage = () => this.pageIndex > 0;
     this.dataSource.sortingDataAccessor = (item, property) => this.sortingDataAccessor(item, property);
     this.dataSource.sort = this.sort;
   }
@@ -71,7 +77,7 @@ export class TransportUnitDialog implements OnInit, AfterContentInit {
    *
    */
   loadData(): void {
-    this._tuService.getAllTransportUnits(this.filter).subscribe(data => {
+    this._tuService.getTransportUnitsForPage(this.filter, this.pageIndex).subscribe(data => {
       this.dataSource.data = data;
       this.queryMode = 'determinate';
     });
@@ -96,8 +102,10 @@ export class TransportUnitDialog implements OnInit, AfterContentInit {
    */
   search(): void {
     this.location.replaceState('transport-units/' + this.filter);
+    this.pageIndex = 0;
+    this.paginator.pageIndex = 0;
+    this.paginatorOldPageIndex = 0;
     this.loadData();
-    this.dataSource.paginator.firstPage();
   }
 
   /**
@@ -111,9 +119,9 @@ export class TransportUnitDialog implements OnInit, AfterContentInit {
     switch (property) {
       /* nested properties of item */
       case 'type': return item.type.name;
-      case 'location': return item.location.name;
-      case 'order': return item.activeTransportOrder.isActive;
-      case 'error': return item.location.hasTu;
+      case 'location': return item.locationLabel;
+      case 'order': return item.hasActiveTo;
+      case 'error': return item.errorCodes;
 
       /* direct properties of item */
       default: return item[property];
@@ -136,5 +144,16 @@ export class TransportUnitDialog implements OnInit, AfterContentInit {
     setTimeout(() => {
       this._appTitleService.setDetailsView(false);
     }, 0);
+  }
+
+  pageChange(event): void {
+    if (event.pageIndex === 1) { // next Page
+      this.paginatorOldPageIndex++;
+    } else { // prev Page
+      this.paginatorOldPageIndex--;
+    }
+    this.pageIndex = this.paginatorOldPageIndex;
+    this.loadData();
+    this.paginator.pageIndex = 0;
   }
 }
