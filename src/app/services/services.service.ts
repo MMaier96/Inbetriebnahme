@@ -4,18 +4,17 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GraphQLResponse } from '../objects/graphql-response';
+import { TokenService } from './token.service';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'graphqlToken': '77ABF258B428C813D3FE91C737F3089AAEB9814931D6EF3DA2AA01AEB10A6A77C5407A73AB75B6A6A562B0E64A53D3957D36396766FF52DC2586877D4D97D4E7'
-  })
-};
 
 @Injectable()
 export class ServicesService {
 
   /* Inject the HTTP Client */
-  constructor( private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private tokenService: TokenService
+  ) { }
 
   getAllServices(): Observable<Service[]> {
     return this.http.post<GraphQLResponse>('/query', {
@@ -28,7 +27,7 @@ export class ServicesService {
           runtimeState
         }
       }`
-    }, httpOptions).pipe(
+    }, this.tokenService.getHttpOptions()).pipe(
       map( response => response.data.serviceStates)
     );
   }

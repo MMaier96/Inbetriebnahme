@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'controller', component: ControllerDialog },
   { path: 'dashboard', component: DashboardDialog },
   { path: 'locations', component: LocationsDialog },
+  { path: 'locations/:filter', component: LocationsDialog },
   { path: 'transport-units', component: TransportUnitDialog },
   { path: 'transport-units/details/:tuName', component: TransportUnitDetails },
   { path: 'transport-units/:filter', component: TransportUnitDialog },

@@ -1,3 +1,4 @@
+import { LoginService } from './../../services/login.service';
 import { Component, OnInit } from '@angular/core';
 import {MatSnackBar} from '@angular/material';
 
@@ -8,20 +9,27 @@ import {MatSnackBar} from '@angular/material';
 })
 export class LoginDialog implements OnInit {
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(
+    private snackBar: MatSnackBar,
+    private _loginService: LoginService
+  ) { }
 
   ngOnInit() {
   }
 
   login(user: string, password: string) {
-    if (user === 'admin' && password === 'admin') {
-      localStorage.setItem('user', password);
-      window.location.reload();
-    } else {
-      this.snackBar.open('Username or password wrong!', 'loginFailed', {
-        duration: 2000,
-      });
-    }
+    console.log(user);
+    this._loginService.login(user, password).subscribe(data => {
+      console.log(data);
+      if (data.token != null) {
+        localStorage.setItem('graphql-token', data.token);
+        window.location.reload();
+      } else {
+        this.snackBar.open('Username or password wrong!', 'loginFailed', {
+          duration: 2000,
+        });
+      }
+    });
   }
 
   keyDownFunction(event, user: string, password: string) {

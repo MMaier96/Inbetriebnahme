@@ -1,17 +1,20 @@
+import { ControllerService } from './../../services/controller.service';
+import { Controller } from './../../objects/controller';
 import { AppTitleService } from './../../services/app-title.service';
-import { TransportUnitService } from './../../services/transport-unit.service';
-import { Component, ViewChild, OnInit, AfterContentInit } from '@angular/core';
-import { TransportUnit } from '../../objects/transport-unit';
+import { Component, ViewChild, OnInit, AfterContentInit, ViewEncapsulation } from '@angular/core';
+
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { environment } from 'src/environments/environment.prod';
 
-import {Location} from '@angular/common';
-
+/* Metadata of the Component */
 @Component({
   selector: 'controller-dialog',
   styleUrls: ['controller.dialog.scss'],
   templateUrl: 'controller.dialog.html',
+  encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({height: '0px', minHeight: '0', display: 'none'})),
@@ -21,75 +24,70 @@ import {Location} from '@angular/common';
   ],
 })
 export class ControllerDialog implements OnInit, AfterContentInit {
-  /* Load Elements from Template */
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
 
-  /* Data for Template */
-  dataSource: MatTableDataSource<TransportUnit>;
-  columnsToDisplay = ['name', 'status'];
-  maxItems: number;
-  searchValue: string;
-  filter: string;
-  mode = 'indeterminate';
+  /* HTML-Template Elements */
+    @ViewChild(MatPaginator)
+    paginator: MatPaginator;
+
+    @ViewChild(MatSort)
+    sort: MatSort;
+
+  /* Class variables for HTML-Template and TS-Logic */
+    columnsToDisplay = ['name', 'available', 'runtimeState'];
+    dataSource: MatTableDataSource<Controller>;
+    panelOpenState = false;
+    queryMode = 'indeterminate';
 
   /* Inject the Service */
-  constructor(
-    private _tuService: TransportUnitService,
-    private _appTitleService: AppTitleService,
-    private route: ActivatedRoute,
-    private location: Location) { }
+    constructor(
+      private _controllerService: ControllerService,
+      private _appTitleService: AppTitleService,
+      private route: ActivatedRoute,
+      private location: Location
+    ) { }
 
-  /* Lifcycle-Hook onCreation */
-  ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.filter = params.get('filter');
-    });
-    this.dataSource = new MatTableDataSource<TransportUnit>();
-    this.loadData(this.filter);
-    this.dataSource.paginator = this.paginator;
-    this.paginator.getNumberOfPages = () => this.maxItems / this.paginator.pageSize;
-    this.dataSource.sortingDataAccessor = (item, property) => {
-
-      switch (property) {
-        /* nested properties of item */
-        case 'type': return item.type.name;
-        case 'location': return item.location.name;
-        case 'order': return item.activeTransportOrder.isActive;
-        case 'error': return item.location.hasTu;
-
-        /* direct properties of item */
-        default: return item[property];
-      }
-    };
+  /**
+   * Lifecycle-hook for the creation of the app.
+   */
+  ngOnInit(): void {
+    this.dataSource = new MatTableDataSource<Controller>();
+    this.loadData();
+    this.dataSource.sortingDataAccessor = (item, property) => this.sortingDataAccessor(item, property);
     this.dataSource.sort = this.sort;
   }
 
-  /* Load data from Service */
-  loadData(filter?: string) {
-    this._tuService.getAllTransportUnits(filter).subscribe(data => {
+  /**
+   * Loads the data from the service and bind it to the class when finished.
+   * Also change progressbar to 'determinate' in order to disappear.
+   *
+   * @Param filter (optional): Filter
+   *
+   */
+  loadData(): void {
+    this._controllerService.getObjectsForPage('', 0).subscribe(data => {
       this.dataSource.data = data;
-      this.mode = 'determinate';
+      this.queryMode = 'determinate';
     });
-    this._tuService.getAllTransportUnitsCount(filter).subscribe(data => this.maxItems = data);
   }
 
-  /* Filter Function */
-  applyFilter(filterValue: string) {
-    /* Set Filter String to DataSource */
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  /**
+   * Reffer the property of the item.
+   * This is needed because the table can't handle nested objects
+   *
+   * @Param item: The item from the table
+   * @Param property: Called property on the item
+   */
+  sortingDataAccessor(item, property): any {
+    switch (property) {
+      /* nested properties of item */
+      case 'error': return item.errorCodes;
 
-    /* Reset the Paginator Page */
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+      /* direct properties of item */
+      default: return item[property];
     }
   }
 
-  search(filter) {
-    this.location.replaceState('transport-units/' + filter);
-    this.loadData(filter);
-    this.dataSource.paginator.firstPage();
-  }
+
 
   /**
    * Bugfix: https://stackoverflow.com/questions/43375532/expressionchangedafterithasbeencheckederror-explained

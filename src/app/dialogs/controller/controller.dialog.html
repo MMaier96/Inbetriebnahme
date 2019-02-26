@@ -1,32 +1,41 @@
-<mat-progress-bar *ngIf="mode === 'indeterminate'" [mode]="mode"></mat-progress-bar>
-<mat-form-field>
-  <input #filterinput matInput type="text" placeholder="Search for any value ..." [value]="filter">
-  <button mat-button *ngIf="filterinput.value" matSuffix mat-icon-button aria-label="Clear" (click)="filterinput.value=''">
-    <mat-icon>close</mat-icon>
-  </button>
-</mat-form-field>
-<button mat-raised-button color="primary" (click)="search(filterinput.value)">Search</button>
+<!-- ProgressBar for loading Query -->
+<mat-progress-bar *ngIf="queryMode === 'indeterminate'" [mode]="queryMode"></mat-progress-bar>
 
-<div class="example-container mat-elevation-z8">
-<table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+<!-- Table -->
+  <div class="example-container mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
 
-  <!-- START COLUMN DEFINITION -->
-    <ng-container matColumnDef="name" sticky>
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let row"> {{row?.name}} </td>
-    </ng-container>
+      <!-- START COLUMN DEFINITION -->
 
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-      <td mat-cell *matCellDef="let row">
-        <service-status [status]='"running"'></service-status>
-      </td>
-    </ng-container>
-  <!-- END COLUMN DEFINITION -->
+        <!-- 'NAME' Column (sticky) -->
+          <ng-container matColumnDef="name" sticky>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+            <td mat-cell *matCellDef="let row"> {{row?.name}} </td>
+          </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
-  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;">
-  </tr>
-</table>
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+        <!-- 'TYPE' Column -->
+          <ng-container matColumnDef="available">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Available </th>
+            <td mat-cell *matCellDef="let row"> {{row?.available}} </td>
+          </ng-container>
+
+        <!-- 'LOCATION' Column -->
+         <ng-container matColumnDef="runtimeState">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> State</th>
+            <td mat-cell *matCellDef="let row">
+              <service-status [status]='row?.runtimeState'></service-status>
+            </td>
+          </ng-container>
+
+        <!-- END COLUMN DEFINITION -->
+
+      <!-- END COLUMN DEFINITION -->
+        <!-- Header Row -->
+          <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
+
+          <!-- Data Row -->
+          <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element"></tr>
+
+      <!-- END COLUMN DEFINITION -->
+    </table>
 </div>

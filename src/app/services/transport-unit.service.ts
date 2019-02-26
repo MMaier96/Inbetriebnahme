@@ -4,22 +4,21 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TransportUnit } from '../objects/transport-unit';
 import { GraphQLResponse } from '../objects/graphql-response';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
+import { GraphQLService } from './graphql.service';
+import { TokenService } from './token.service';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'graphqlToken': '77ABF258B428C813D3FE91C737F3089AAEB9814931D6EF3DA2AA01AEB10A6A77C5407A73AB75B6A6A562B0E64A53D3957D36396766FF52DC2586877D4D97D4E7'
-  })
-};
-const pageSize = environment.defaultPageSize;
 
 @Injectable()
-export class TransportUnitService {
+export class TransportUnitService implements GraphQLService<TransportUnit> {
 
   /* Inject the HTTP Client */
-  constructor( private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private tokenService: TokenService
+  ) { }
 
-  getTransportUnitsForPage(filter: string, pageIndex: number): Observable<TransportUnit[]> {
+  getObjectsForPage(filter: string, pageIndex: number): Observable<TransportUnit[]> {
     filter = filter || '';
     return this.http.post<GraphQLResponse>('/query', {
       query: `{
@@ -32,8 +31,8 @@ export class TransportUnitService {
             }
           },
           paging: {
-            start: ` + pageSize * pageIndex + `,
-            offset:  ` + pageSize + `
+            start: ` + environment.defaultPageSize * pageIndex + `,
+            offset:  ` + environment.defaultPageSize + `
           }
         ) {
         name
@@ -45,44 +44,31 @@ export class TransportUnitService {
         errorCodes
       }
     }`
-    }, httpOptions).pipe(
+    }, this.tokenService.getHttpOptions()).pipe(
       map( response => response.data.transportUnits)
     );
   }
 
-  getAllTransportUnitsCount(filter?: string): Observable<number> {
-    filter = filter || '';
+  getObjectsCount(): Observable<number> {
     return this.http.post<GraphQLResponse>('/query', {
       query: `{
-        transportUnitCount(
-          filter: {
-            entries: {
-              searchKey: "name",
-              operator: EQUALS,
-              values: "%` + filter + `%"
-            }
-          }
-        )
+        transportUnitCount
       }`
-    }, httpOptions).pipe(
-      map( response => response.data.transportUnitCount)
+    }, this.tokenService.getHttpOptions()).pipe(
+      map( response => response.data.transportUnitCount as number)
     );
   }
 
-  getTransportUnitByName(tuName: string) {
+  getObjectByProperty(propertyName: string, value: string): Observable<TransportUnit> {
     return this.http.post<GraphQLResponse>('/query', {
       query: `{
         transportUnits(
           filter: {
             entries: {
-              searchKey: "name",
+              searchKey: "` + propertyName + `",
               operator: EQUALS,
-              values: "%` + tuName + `%"
+              values: "%` + value + `%"
             }
-          },
-          paging: {
-            start: 0,
-            offset: ` + pageSize + `
           }
         ) {
         cubature {
@@ -110,8 +96,8 @@ export class TransportUnitService {
         weight
       }
     }`
-    }, httpOptions).pipe(
-      map( response => response.data.transportUnits)
+    }, this.tokenService.getHttpOptions()).pipe(
+      map( response => response.data.transportUnits as TransportUnit)
     );
   }
 }

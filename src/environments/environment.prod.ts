@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  defaultPageSize: 5
+  defaultPageSize: 15
 };

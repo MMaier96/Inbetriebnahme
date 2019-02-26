@@ -1,3 +1,4 @@
+import { LoginService } from './services/login.service';
 import { NgModule } from '@angular/core';
 import { TransportUnitDetails } from './dialogs/transport-unit/details/transport-unit-details.dialog';
 import { TransportOrderDetails } from './dialogs/transport-order/details/transport-order-details.dialog';
@@ -30,6 +31,8 @@ import { ServiceStatusColorPipe } from './pipes/service-status-color.pipe';
 import { ServicesService } from './services/services.service';
 import { ExternalDialogLink } from './components/external-dialog-link/external-dialog-link';
 import { TruncPipe } from './pipes/trunc.pipe';
+import { TokenService } from './services/token.service';
+import { ControllerService } from './services/controller.service';
 
 @NgModule({
   declarations: [
@@ -74,7 +77,10 @@ import { TruncPipe } from './pipes/trunc.pipe';
     TransportUnitService,
     TransportOrderService,
     LocationService,
-    ServicesService
+    ServicesService,
+    LoginService,
+    TokenService,
+    ControllerService
   ],
   bootstrap: [MainComponent]
 })

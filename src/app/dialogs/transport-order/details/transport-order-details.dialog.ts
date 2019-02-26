@@ -15,13 +15,13 @@ export class TransportOrderDetails implements OnInit, AfterContentInit {
 
   constructor(
     private route: ActivatedRoute,
-    private _tuService: TransportOrderService,
+    private _toService: TransportOrderService,
     private _appTitleService: AppTitleService
   ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.tuData = this._tuService.getTransportOrderByName(params.get('tuName'));
+      this.tuData = this._toService.getObjectByProperty('id', params.get('toName'));
     });
   }
 

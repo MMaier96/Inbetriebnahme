@@ -1,27 +1,34 @@
+import { environment } from './../../environments/environment';
+import { GraphQLService } from './graphql.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GraphQLResponse } from '../objects/graphql-response';
 import { TransportOrder } from '../objects/transport-order';
+import { TokenService } from './token.service';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'graphqlToken': '77ABF258B428C813D3FE91C737F3089AAEB9814931D6EF3DA2AA01AEB10A6A77C5407A73AB75B6A6A562B0E64A53D3957D36396766FF52DC2586877D4D97D4E7'
-  })
-};
 
 @Injectable()
-export class TransportOrderService {
+export class TransportOrderService implements GraphQLService<TransportOrder> {
 
   /* Inject the HTTP Client */
-  constructor( private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private tokenService: TokenService
+  ) { }
 
-  getAllTransportOrders(filter?: string): Observable<TransportOrder[]> {
+  getObjectsForPage(filter: string, pageIndex: number): Observable<TransportOrder[]> {
     filter = filter || '';
     return this.http.post<GraphQLResponse>('/query', {
       query: `{
-        transportOrders {
+        transportOrders (
+          paging: {
+            start: ` + environment.defaultPageSize * pageIndex + `,
+            offset:  ` + environment.defaultPageSize + `
+          }
+        ) {
+          id
           active
           currentLocation {
             name
@@ -33,57 +40,47 @@ export class TransportOrderService {
           transportUnitName
         }
       }`
-    }, httpOptions).pipe(
+    }, this.tokenService.getHttpOptions()).pipe(
       map( response => response.data.transportOrders as TransportOrder[])
     );
   }
 
-  getAllTransportOrdersCount(filter?: string): Observable<number> {
-    filter = filter || '';
+  getObjectsCount(): Observable<number> {
     return this.http.post<GraphQLResponse>('/query', {
       query: `{
-        transportUnitsCount(name:"%` + filter + `%")
+        transportOrderCount
       }`
-    }, httpOptions).pipe(
-      map( response => response.data.transportUnitsCount)
+    }, this.tokenService.getHttpOptions()).pipe(
+      map( response => response.data.transportUnitsCount as number)
     );
   }
 
-  getTransportOrderByName(tuName: string) {
+  getObjectByProperty(propertyName: string, value: string): Observable<TransportOrder> {
     return this.http.post<GraphQLResponse>('/query', {
       query: `{
-        transportUnits(
-        offset: 1,
-        name: "` + tuName + `",
-        first: 0
-      ) {
-        cubature {
-          height
-          length
-          weight
-        }
-        empty
-        emptyStack
-        errorCodes
-        hasActiveTo
-        id
-        lastDc2AmMovementBookingReason
-        lastLocationBookingTime
-        locationLabel
-        name
-        routingPoint
-        socOrderInfo
-        superTu {
+        transportOrders(
+          filter: {
+            entries: {
+              searchKey: "` + propertyName + `",
+              operator: EQUALS,
+              values: ` + +value + `
+            }
+          }
+        ) {
           id
-        }
-        type {
-          id
-        }
-        weight
+          active
+          currentLocation {
+            name
+          }
+          error
+          nextTarget {
+            name
+          }
+          transportUnitName
       }
     }`
-    }, httpOptions).pipe(
-      map( response => response.data.transportUnits)
+    }, this.tokenService.getHttpOptions()).pipe(
+      map( response => response.data.transportOrders as TransportOrder)
     );
   }
 }

@@ -5,6 +5,10 @@ div{
   align-items: center;
   cursor: pointer;
 }
+div[disabled="true"]{
+  opacity: 0.3;
+  cursor: initial;
+}
 p {
   margin: 0px;
   margin-top: 10px;

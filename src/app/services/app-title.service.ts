@@ -10,5 +10,4 @@ export class AppTitleService {
   setDetailsView(detailsView: boolean): void {
     this.isDetailsView.emit(detailsView);
   }
-
 }

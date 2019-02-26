@@ -77,11 +77,11 @@ export class TransportUnitDialog implements OnInit, AfterContentInit {
    *
    */
   loadData(): void {
-    this._tuService.getTransportUnitsForPage(this.filter, this.pageIndex).subscribe(data => {
+    this._tuService.getObjectsForPage(this.filter, this.pageIndex).subscribe(data => {
       this.dataSource.data = data;
       this.queryMode = 'determinate';
     });
-    this._tuService.getAllTransportUnitsCount(this.filter).subscribe(data => this.maxItems = data);
+    this._tuService.getObjectsCount().subscribe(data => this.maxItems = data);
   }
 
   /**
@@ -100,7 +100,8 @@ export class TransportUnitDialog implements OnInit, AfterContentInit {
   /**
    * Sets the serverside filter as url parameter, send a new data request with filter and resets the paginator
    */
-  search(): void {
+  search(searchValue): void {
+    this.filter = searchValue;
     this.location.replaceState('transport-units/' + this.filter);
     this.pageIndex = 0;
     this.paginator.pageIndex = 0;

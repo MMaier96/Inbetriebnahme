@@ -1,62 +1,74 @@
+import { GraphQLService } from './graphql.service';
+import { Location } from './../objects/location';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { TransportUnit } from '../objects/transport-unit';
 import { GraphQLResponse } from '../objects/graphql-response';
+import { environment } from 'src/environments/environment';
+import { TokenService } from './token.service';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'graphqlToken': '77ABF258B428C813D3FE91C737F3089AAEB9814931D6EF3DA2AA01AEB10A6A77C5407A73AB75B6A6A562B0E64A53D3957D36396766FF52DC2586877D4D97D4E7'
-  })
-};
 
 @Injectable()
-export class LocationService {
+export class LocationService implements GraphQLService<Location> {
 
   /* Inject the HTTP Client */
-  constructor( private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private tokenService: TokenService
+  ) { }
 
-  getAllLocations(filter?: string): Observable<TransportUnit[]> {
+  getObjectsForPage(filter: string, pageIndex: number): Observable<Location[]> {
     filter = filter || '';
     return this.http.post<GraphQLResponse>('/query', {
       query: `{
         locations(
-        offset: 50,
-        name: "%` + filter + `%",
-        first: 0
-      ) {
-        name
-        storageLocation
-        hostName
-        socName
-        locked
-      }
-    }`
-    }, httpOptions).pipe(
-      map( response => response.data.locations)
-    );
-  }
-
-  getAllLocationsCount(filter?: string): Observable<number> {
-    filter = filter || '';
-    return this.http.post<GraphQLResponse>('/query', {
-      query: `{
-        transportUnitsCount(name:"%` + filter + `%")
+          filter: {
+            entries: {
+              searchKey: "name",
+              operator: EQUALS,
+              values: "%` + filter + `%"
+            }
+          },
+          paging: {
+            start: ` + environment.defaultPageSize * pageIndex + `,
+            offset:  ` + environment.defaultPageSize + `
+          }
+        ) {
+          name
+          storageLocation
+          hostName
+          socName
+          locked
+        }
       }`
-    }, httpOptions).pipe(
-      map( response => response.data.transportUnitsCount)
+    }, this.tokenService.getHttpOptions()).pipe(
+      map( response => response.data.locations as Location[])
     );
   }
 
-  getLocationByName(tuName: string) {
+  getObjectsCount(): Observable<number> {
     return this.http.post<GraphQLResponse>('/query', {
       query: `{
-        transportUnits(
-        offset: 1,
-        name: "` + tuName + `",
-        first: 0
-      ) {
+        locationCount
+      }`
+    }, this.tokenService.getHttpOptions()).pipe(
+      map( response => response.data.locationCount as number)
+    );
+  }
+
+  getObjectByProperty(propertyName: string, value: string) {
+    return this.http.post<GraphQLResponse>('/query', {
+      query: `{
+        locations(
+          filter: {
+            entries: {
+              searchKey: "` + propertyName + `",
+              operator: EQUALS,
+              values: "%` + value + `%"
+            }
+          }
+        ) {
         cubature {
           height
           length
@@ -82,8 +94,8 @@ export class LocationService {
         weight
       }
     }`
-    }, httpOptions).pipe(
-      map( response => response.data.transportUnits)
+    }, this.tokenService.getHttpOptions()).pipe(
+      map( response => response.data.locations as Location)
     );
   }
 }

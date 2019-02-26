@@ -21,7 +21,7 @@ export class TransportUnitDetails implements OnInit, AfterContentInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.tuData = this._tuService.getTransportUnitByName(params.get('tuName'));
+      this.tuData = this._tuService.getObjectByProperty('name', params.get('tuName'));
     });
   }
 

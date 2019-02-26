@@ -9,6 +9,7 @@ export class ExternalDialogLink implements OnInit {
 
   @Input() icon: String;
   @Input() name: String;
+  @Input() disabled: boolean;
 
   constructor() { }
 

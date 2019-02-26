@@ -8,7 +8,7 @@ export class IsTOActivePipe implements PipeTransform {
 
   transform(to: TransportOrder, args?: any): any {
     if (to != null) {
-      return to.isActive;
+      return to.active;
     }
     return false;
   }

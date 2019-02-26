@@ -61,7 +61,7 @@ export class MainComponent implements OnDestroy, OnInit, AfterContentInit {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
   ngOnInit(): void {
-    if (localStorage.getItem('user') != null) {
+    if ( localStorage.getItem('graphql-token') != null) {
       this.loggedIn = true;
     }
   }
