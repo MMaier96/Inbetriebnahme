@@ -102,7 +102,8 @@ export class TransportOrderDialog implements OnInit, AfterContentInit {
   /**
    * Sets the serverside filter as url parameter, send a new data request with filter and resets the paginator
    */
-  search(): void {
+  search(value): void {
+    this.filter = value;
     this.location.replaceState('transport-units/' + this.filter);
     this.pageIndex = 0;
     this.paginator.pageIndex = 0;
@@ -135,6 +136,7 @@ export class TransportOrderDialog implements OnInit, AfterContentInit {
    */
   resetFilter(): void {
     this.filter = '';
+    this.location.replaceState('transport-orders');
   }
 
 

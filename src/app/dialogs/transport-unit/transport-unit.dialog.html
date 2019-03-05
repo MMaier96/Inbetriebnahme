@@ -84,8 +84,11 @@
               <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
               <external-dialog-link *ngIf="element.locationLabel" [disabled]="false" icon="open_in_new" name="Location Dialog" [routerLink]="'../locations/' + element.locationLabel"></external-dialog-link>
               <external-dialog-link *ngIf="!element.locationLabel" [disabled]="true" icon="open_in_new" name="Location Dialog"></external-dialog-link>
-              <external-dialog-link icon="open_in_new" name="TransportOrder Dialog"></external-dialog-link>
-              <external-dialog-link icon="info_outline" name="Details Dialog" [routerLink]="'details/' + element.name"></external-dialog-link>
+
+              <external-dialog-link *ngIf="element.name" [disabled]="false" icon="open_in_new" name="TransportOrder Dialog" [routerLink]="'../transport-orders/' + element.name"></external-dialog-link>
+              <external-dialog-link *ngIf="!element.name" [disabled]="true" icon="open_in_new" name="TransportOrder Dialog"></external-dialog-link>
+
+              <external-dialog-link icon="info_outline" name="Details Dialog" [routerLink]="'/transport-units/details/' + element.name"></external-dialog-link>
               </div>
             </td>
           </ng-container>

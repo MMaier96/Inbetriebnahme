@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, AfterContentInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, AfterContentInit, OnChanges, DoCheck, AfterContentChecked, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { AppTitleService } from './services/app-title.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { AppTitleService } from './services/app-title.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnDestroy, OnInit, AfterContentInit {
+export class MainComponent implements OnDestroy, OnInit, AfterContentInit, DoCheck{
   /* Settings for general APP */
   appTitle: String;
   isDetailsView: boolean;
@@ -61,10 +61,29 @@ export class MainComponent implements OnDestroy, OnInit, AfterContentInit {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
   ngOnInit(): void {
+    console.log('now');
     if ( localStorage.getItem('graphql-token') != null) {
       this.loggedIn = true;
     }
   }
+
+  ngDoCheck() {
+    if (this.loggedIn) {
+      this._appTitleService.isDetailsView.subscribe( isDetailsView => {
+        this.isDetailsView = isDetailsView;
+        if (!isDetailsView) {
+          const routeName = this.route.snapshot['_routerState'].url.replace('/', '');
+          for (const item of this.navItems) {
+            console.log(routeName);
+            if (routeName.includes(item.routerLink)) {
+              this.appTitle = item.name;
+            }
+          }
+        }
+      });
+    }
+  }
+
 
   logout() {
     localStorage.removeItem('user');
@@ -82,7 +101,7 @@ export class MainComponent implements OnDestroy, OnInit, AfterContentInit {
         if (!isDetailsView) {
           const routeName = this.route.snapshot['_routerState'].url.replace('/', '');
           for (const item of this.navItems) {
-            if (item.routerLink === routeName) {
+            if (routeName.includes(item.routerLink)) {
               this.appTitle = item.name;
             }
           }

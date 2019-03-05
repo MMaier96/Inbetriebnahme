@@ -133,7 +133,8 @@ export class TransportUnitDialog implements OnInit, AfterContentInit {
    * Resets the filter value
    */
   resetFilter(): void {
-    this.filter = '';
+    this.filter = null;
+    this.location.replaceState('transport-units');
   }
 
 
@@ -156,5 +157,9 @@ export class TransportUnitDialog implements OnInit, AfterContentInit {
     this.pageIndex = this.paginatorOldPageIndex;
     this.loadData();
     this.paginator.pageIndex = 0;
+  }
+
+  loadPage(url){
+    console.log(location.replace(url));
   }
 }

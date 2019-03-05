@@ -23,12 +23,18 @@ export class TransportOrderService implements GraphQLService<TransportOrder> {
     return this.http.post<GraphQLResponse>('/query', {
       query: `{
         transportOrders (
+          filter: {
+            entries: {
+              searchKey: "transportUnit.name",
+              operator: EQUALS,
+              values: "%` + filter + `%"
+            }
+          },
           paging: {
             start: ` + environment.defaultPageSize * pageIndex + `,
             offset:  ` + environment.defaultPageSize + `
           }
         ) {
-          id
           active
           currentLocation {
             name

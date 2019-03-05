@@ -4,7 +4,7 @@
 <!-- Search with Clear Button -->
   <mat-form-field>
     <!-- Input for search -->
-      <input matInput type="text" placeholder="Search for any value ..." [value]="filter">
+      <input matInput #searchInput type="text" placeholder="Search for any value ..." [value]="filter">
 
     <!-- Clear Button -->
       <button mat-button *ngIf="filter != ''" matSuffix mat-icon-button aria-label="Clear" (click)="resetFilter()">
@@ -14,7 +14,7 @@
   </mat-form-field>
 
 <!-- Submit Button -->
-  <button mat-raised-button color="primary" (click)="search()">Search</button>
+  <button mat-raised-button color="primary" (click)="search(searchInput.value)">Search</button>
 
 
 
@@ -49,10 +49,10 @@
       <!-- START COLUMN DEFINITION -->
 
         <!-- 'NAME' Column (sticky) -->
-          <ng-container matColumnDef="tuName" sticky>
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> TuName </th>
-            <td mat-cell *matCellDef="let row"> {{row?.transportUnitName}} </td>
-          </ng-container>
+        <ng-container matColumnDef="tuName" sticky>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> TuName </th>
+          <td mat-cell *matCellDef="let row"> {{row?.transportUnitName}} </td>
+        </ng-container>
 
         <!-- 'TYPE' Column -->
           <ng-container matColumnDef="location">
@@ -82,15 +82,13 @@
           <ng-container matColumnDef="expandedDetail">
             <td mat-cell class="detail" *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
               <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-              <external-dialog-link icon="open_in_new" name="Location Dialog"></external-dialog-link>
-              <external-dialog-link icon="open_in_new" name="TransportOrder Dialog"></external-dialog-link>
-              <external-dialog-link icon="info_outline" name="Details Dialog" [routerLink]="'details/' + element.id"></external-dialog-link>
-                <!--
-                <button mat-raised-button>Jump to 'Location Dialog'</button>
-                <button mat-raised-button>Jump to 'TransportOrder Dialog'</button>
-                <button mat-raised-button color="primary" >View more Details</button>
-              -->
-              </div>
+                <external-dialog-link *ngIf="element.currentLocation" [disabled]="false" icon="open_in_new" name="Location Dialog" [routerLink]="'/locations/' + element.currentLocation.name"></external-dialog-link>
+                <external-dialog-link *ngIf="!element.currentLocation" [disabled]="true" icon="open_in_new" name="Location Dialog"></external-dialog-link>
+
+                <external-dialog-link icon="open_in_new" name="TransportUnit Dialog" [routerLink]="'/transport-units/' + element.transportUnitName"></external-dialog-link>
+
+                <external-dialog-link icon="info_outline" name="Details Dialog" [routerLink]="'/transport-orders/details/' + element.transportUnitName"></external-dialog-link>
+                </div>
             </td>
           </ng-container>
 
