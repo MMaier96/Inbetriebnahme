@@ -1,14 +1,13 @@
 import { TransportOrder } from './../../objects/transport-order';
 import { AppTitleService } from './../../services/app-title.service';
-import { TransportUnitService } from './../../services/transport-unit.service';
 import { Component, ViewChild, OnInit, AfterContentInit, ViewEncapsulation } from '@angular/core';
-import { TransportUnit } from '../../objects/transport-unit';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { environment } from 'src/environments/environment.prod';
 import { TransportOrderService } from 'src/app/services/transport-order.service';
+import { CreateToActionDialog, CreateTOData } from './actions/createTO/create-to-action';
 
 /* Metadata of the Component */
 @Component({
@@ -51,7 +50,8 @@ export class TransportOrderDialog implements OnInit, AfterContentInit {
       private _toService: TransportOrderService,
       private _appTitleService: AppTitleService,
       private route: ActivatedRoute,
-      private location: Location
+      private location: Location,
+      public dialog: MatDialog
     ) { }
 
   /**
@@ -159,5 +159,25 @@ export class TransportOrderDialog implements OnInit, AfterContentInit {
     this.pageIndex = this.paginatorOldPageIndex;
     this.loadData();
     this.paginator.pageIndex = 0;
+  }
+
+
+
+  createTO(): void {
+    const dialogRef = this.dialog.open(CreateToActionDialog, {
+      data: {
+        reason: 'WamasWEB Test',
+        tuName: 'AnotherTU',
+        transportOrderType: 'STORAGE',
+        target: 'HRA01X002Y01Z11'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      this._toService.createTransportOrder(result).subscribe(data => {
+        console.log(data);
+      });
+    });
   }
 }

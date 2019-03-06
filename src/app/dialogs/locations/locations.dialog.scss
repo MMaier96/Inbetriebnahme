@@ -156,9 +156,6 @@ svg.mat-paginator-icon {
   }
 }
 
-.mat-expansion-panel{
-  margin: 8px 0px 50px;
-}
 
 mat-expansion-panel.mat-expansion-panel.ng-tns-c12-4.mat-expanded.mat-expansion-panel-spacing {
   margin-bottom: 50px;
@@ -187,4 +184,7 @@ td.detail.mat-cell.cdk-column-expandedDetail.mat-column-expandedDetail.ng-tns-c9
     color: #ffffffab;
     background: #3f51b5;
     padding-bottom:5px
+}
+td.detail.mat-cell {
+  padding: 0px !important;
 }

@@ -74,7 +74,6 @@ export class MainComponent implements OnDestroy, OnInit, AfterContentInit, DoChe
         if (!isDetailsView) {
           const routeName = this.route.snapshot['_routerState'].url.replace('/', '');
           for (const item of this.navItems) {
-            console.log(routeName);
             if (routeName.includes(item.routerLink)) {
               this.appTitle = item.name;
             }
@@ -86,7 +85,7 @@ export class MainComponent implements OnDestroy, OnInit, AfterContentInit, DoChe
 
 
   logout() {
-    localStorage.removeItem('user');
+    localStorage.removeItem('graphql-token');
     window.location.reload();
   }
 

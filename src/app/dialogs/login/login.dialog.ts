@@ -18,7 +18,6 @@ export class LoginDialog implements OnInit {
   }
 
   login(user: string, password: string) {
-    console.log(user);
     this._loginService.login(user, password).subscribe(data => {
       console.log(data);
       if (data.token != null) {

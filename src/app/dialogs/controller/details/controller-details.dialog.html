@@ -1,33 +1,33 @@
-<div *ngFor="let to of toData | async">
+<div *ngFor="let controller of controllerData | async">
   <h2>Direct Properties</h2>
   <table>
     <tr>
       <td>Id:</td>
-      <td>{{ to?.id }}</td>
+      <td>{{ controller?.id }}</td>
     </tr>
     <tr>
       <td>Location:</td>
-      <td>{{ to?.locationLabel }}</td>
+      <td>{{ controller?.locationLabel }}</td>
     </tr>
     <tr>
       <td>WaitingFor:</td>
-      <td>{{ to?.waitingFor }}</td>
+      <td>{{ controller?.waitingFor }}</td>
     </tr>
     <tr>
       <td>Priority:</td>
-      <td>{{ to?.priority }}</td>
+      <td>{{ controller?.priority }}</td>
     </tr>
     <tr>
       <td>Type:</td>
-      <td>{{ to?.type }}</td>
+      <td>{{ controller?.type }}</td>
     </tr>
     <tr>
       <td>Age:</td>
-      <td>{{ to?.age }}</td>
+      <td>{{ controller?.age }}</td>
     </tr>
     <tr>
       <td>finished:</td>
-      <td>{{ to?.finished }}</td>
+      <td>{{ controller?.finished }}</td>
     </tr>
   </table>
   <h2>Nested Properties</h2>
@@ -40,7 +40,7 @@
         </mat-expansion-panel-header>
 
         <table>
-          <tr *ngFor="let target of to.targets; index as i">
+          <tr *ngFor="let target of controller.targets; index as i">
             <td>{{ target.name }}</td>
           </tr>
         </table>

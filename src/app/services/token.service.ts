@@ -7,7 +7,7 @@ export class TokenService {
   getHttpOptions() {
     return {
       headers: new HttpHeaders({
-        'graphqlToken': sessionStorage.getItem('graphql-token')
+        'graphqlToken': localStorage.getItem('graphql-token')
       })
     };
   }

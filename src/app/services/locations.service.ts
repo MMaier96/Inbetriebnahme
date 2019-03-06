@@ -69,29 +69,12 @@ export class LocationService implements GraphQLService<Location> {
             }
           }
         ) {
-        cubature {
-          height
-          length
-          weight
-        }
-        empty
-        emptyStack
-        errorCodes
-        hasActiveTo
-        id
-        lastDc2AmMovementBookingReason
-        lastLocationBookingTime
-        locationLabel
-        name
-        routingPoint
-        socOrderInfo
-        superTu {
-          id
-        }
-        type {
-          id
-        }
-        weight
+          routingPoint
+          compartmentRegion
+          description
+          locationGroups {
+            name
+          }
       }
     }`
     }, this.tokenService.getHttpOptions()).pipe(

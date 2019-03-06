@@ -56,7 +56,7 @@
           <ng-container matColumnDef="expandedDetail">
             <td mat-cell class="detail" *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
               <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-              <external-dialog-link icon="info_outline" name="Details Dialog" [routerLink]="'details/' + element?.name"></external-dialog-link>
+              <external-dialog-link icon="info_outline" name="Details Dialog" [routerLink]="'/locations/details/' + element?.name"></external-dialog-link>
               </div>
             </td>
           </ng-container>

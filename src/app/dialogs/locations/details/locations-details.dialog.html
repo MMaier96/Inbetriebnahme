@@ -1,0 +1,35 @@
+<div *ngFor="let loc of locData | async">
+  <h2>Direct Properties</h2>
+  <table>
+    <tr>
+      <td>RoutingPoint:</td>
+      <td>{{ loc?.routingPoint }}</td>
+    </tr>
+    <tr>
+      <td>CompartmentRegion:</td>
+      <td>{{ loc?.compartmentRegion }}</td>
+    </tr>
+    <tr>
+      <td>Description:</td>
+      <td>{{ loc?.description }}</td>
+    </tr>
+  </table>
+  <h2>Nested Properties</h2>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+              Location Groups
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <table>
+          <tr *ngFor="let grp of loc.locationGroups; index as i">
+            <td>{{ grp.name }}</td>
+          </tr>
+        </table>
+      </mat-expansion-panel>
+    </mat-accordion>
+</div>
+
+

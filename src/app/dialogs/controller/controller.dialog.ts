@@ -34,6 +34,7 @@ export class ControllerDialog implements OnInit, AfterContentInit {
 
   /* Class variables for HTML-Template and TS-Logic */
     columnsToDisplay = ['name', 'available', 'runtimeState'];
+    expandedElement: Location | null;
     dataSource: MatTableDataSource<Controller>;
     panelOpenState = false;
     queryMode = 'indeterminate';

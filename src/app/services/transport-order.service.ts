@@ -1,3 +1,4 @@
+import { CreateTOData } from './../dialogs/transport-order/actions/createTO/create-to-action';
 import { environment } from './../../environments/environment';
 import { GraphQLService } from './graphql.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -57,7 +58,7 @@ export class TransportOrderService implements GraphQLService<TransportOrder> {
         transportOrderCount
       }`
     }, this.tokenService.getHttpOptions()).pipe(
-      map( response => response.data.transportUnitsCount as number)
+      map( response => response.data.transportOrderCount as number)
     );
   }
 
@@ -69,24 +70,42 @@ export class TransportOrderService implements GraphQLService<TransportOrder> {
             entries: {
               searchKey: "` + propertyName + `",
               operator: EQUALS,
-              values: ` + +value + `
+              values: %` + value + `%
             }
           }
         ) {
           id
-          active
-          currentLocation {
+          createdOnLocation {
             name
           }
-          error
-          nextTarget {
+          waitingFor
+          priority
+          type
+          targets {
             name
           }
-          transportUnitName
+          age
+          finished
       }
     }`
     }, this.tokenService.getHttpOptions()).pipe(
       map( response => response.data.transportOrders as TransportOrder)
+    );
+  }
+
+
+  createTransportOrder(data: CreateTOData) {
+    return this.http.post<GraphQLResponse>('/query', {
+      query: `mutation{
+        createTransportOrder(
+          reason: "` + data.reason + `"
+          tuName: "` + data.tuName + `"
+          transportOrderType: ` + data.transportOrderType + `
+          target: "` + data.target + `"
+        )
+      }`
+    }, this.tokenService.getHttpOptions()).pipe(
+      map( response => response.data.createTransportOrder)
     );
   }
 }

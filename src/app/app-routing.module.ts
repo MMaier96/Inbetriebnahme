@@ -8,13 +8,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { TransportUnitDialog } from './dialogs/transport-unit/transport-unit.dialog';
 import { TransportOrderDialog } from './dialogs/transport-order/transport-order.dialog';
 import { DashboardDialog } from './dialogs/dashboard/dashboard.dialog';
+import { LocationsDetailsDialog } from './dialogs/locations/details/locations-details.dialog';
 
 const routes: Routes = [
   { path: '', component: DashboardDialog },
   { path: 'controller', component: ControllerDialog },
+  { path: 'controller/details/:controllerName', component: TransportUnitDetails },
   { path: 'dashboard', component: DashboardDialog },
   { path: 'locations', component: LocationsDialog },
   { path: 'locations/:filter', component: LocationsDialog },
+  { path: 'locations/details/:locName', component: LocationsDetailsDialog },
   { path: 'transport-units', component: TransportUnitDialog },
   { path: 'transport-units/details/:tuName', component: TransportUnitDetails },
   { path: 'transport-units/:filter', component: TransportUnitDialog },

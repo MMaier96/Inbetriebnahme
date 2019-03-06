@@ -1,3 +1,5 @@
+import { CreateToActionDialog } from './dialogs/transport-order/actions/createTO/create-to-action';
+import { LocationsDetailsDialog } from './dialogs/locations/details/locations-details.dialog';
 import { LoginService } from './services/login.service';
 import { NgModule } from '@angular/core';
 import { TransportUnitDetails } from './dialogs/transport-unit/details/transport-unit-details.dialog';
@@ -33,6 +35,7 @@ import { ExternalDialogLink } from './components/external-dialog-link/external-d
 import { TruncPipe } from './pipes/trunc.pipe';
 import { TokenService } from './services/token.service';
 import { ControllerService } from './services/controller.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -53,20 +56,24 @@ import { ControllerService } from './services/controller.service';
     LoginDialog,
     TransportUnitDetails,
     TransportOrderDetails,
+    LocationsDetailsDialog,
     HasAnyToErrorPipe,
     ServiceStatusComponent,
     ServiceStatusColorPipe,
     ExternalDialogLink,
-    TruncPipe
+    TruncPipe,
+    CreateToActionDialog
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MaterialModules,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   entryComponents: [
+    CreateToActionDialog
   ],
   providers: [
     DashboardGridGutterSizePipe,

@@ -1,12 +1,10 @@
 import { TokenService } from './token.service';
 import { Controller } from './../objects/controller';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { TransportUnit } from '../objects/transport-unit';
 import { GraphQLResponse } from '../objects/graphql-response';
-import { environment } from 'src/environments/environment';
 import { GraphQLService } from './graphql.service';
 
 

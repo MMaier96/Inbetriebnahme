@@ -15,8 +15,8 @@ export class LoginService {
     return this.http.post<GraphQLResponse>('/query', {
       query: `{
         login(
-          name: ` + name + `,
-          password: ` + password + `
+          name: "` + name + `",
+          password: "` + password + `"
         ){
           token
         }

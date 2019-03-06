@@ -1,27 +1,27 @@
+import { LocationService } from './../../../services/locations.service';
+import { Location } from './../../../objects/location';
 import { Observable } from 'rxjs';
-import { TransportOrderService } from '../../../services/transport-order.service';
 import { AppTitleService } from 'src/app/services/app-title.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, AfterContentInit } from '@angular/core';
-import { TransportOrder } from 'src/app/objects/transport-order';
 
 @Component({
-  selector: 'transport-order-details',
-  templateUrl: './transport-order-details.dialog.html',
-  styleUrls: ['./transport-order-details.dialog.scss']
+  selector: 'locations-details',
+  templateUrl: './locations-details.dialog.html',
+  styleUrls: ['./locations-details.dialog.scss']
 })
-export class TransportOrderDetails implements OnInit, AfterContentInit {
-  toData: Observable<TransportOrder>;
+export class LocationsDetailsDialog implements OnInit, AfterContentInit {
+  locData: Observable<Location>;
 
   constructor(
     private route: ActivatedRoute,
-    private _toService: TransportOrderService,
+    private _locService: LocationService,
     private _appTitleService: AppTitleService
   ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.toData = this._toService.getObjectByProperty('transportUnit.name', params.get('toName'));
+      this.locData = this._locService.getObjectByProperty('name', params.get('locName'));
     });
   }
 
