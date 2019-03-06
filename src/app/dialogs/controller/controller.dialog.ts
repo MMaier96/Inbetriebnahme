@@ -5,9 +5,6 @@ import { Component, ViewChild, OnInit, AfterContentInit, ViewEncapsulation } fro
 
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
-import { environment } from 'src/environments/environment.prod';
 
 /* Metadata of the Component */
 @Component({
@@ -34,7 +31,7 @@ export class ControllerDialog implements OnInit, AfterContentInit {
 
   /* Class variables for HTML-Template and TS-Logic */
     columnsToDisplay = ['name', 'available', 'runtimeState'];
-    expandedElement: Location | null;
+    expandedElement: Controller | null;
     dataSource: MatTableDataSource<Controller>;
     panelOpenState = false;
     queryMode = 'indeterminate';
@@ -43,8 +40,6 @@ export class ControllerDialog implements OnInit, AfterContentInit {
     constructor(
       private _controllerService: ControllerService,
       private _appTitleService: AppTitleService,
-      private route: ActivatedRoute,
-      private location: Location
     ) { }
 
   /**

@@ -19,12 +19,14 @@ export class LoginDialog implements OnInit {
 
   login(user: string, password: string) {
     this._loginService.login(user, password).subscribe(data => {
-      console.log(data);
       if (data.token != null) {
         localStorage.setItem('graphql-token', data.token);
+        this.snackBar.open(`Successfully logged in as ${user}!`, 'Success', {
+          duration: 2000,
+        });
         window.location.reload();
       } else {
-        this.snackBar.open('Username or password wrong!', 'loginFailed', {
+        this.snackBar.open('Username or password wrong!', 'Failed', {
           duration: 2000,
         });
       }

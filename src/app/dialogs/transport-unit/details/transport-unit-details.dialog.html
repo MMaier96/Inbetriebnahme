@@ -1,6 +1,6 @@
 <div *ngFor="let tu of tuData | async">
   <h2>Direct Properties</h2>
-  <table>
+  <table class="details">
     <tr>
       <td>Id:</td>
       <td>{{ tu?.id }}</td>
@@ -18,31 +18,31 @@
       <td>{{ tu?.empty }}</td>
     </tr>
     <tr>
-      <td>EmptyStack:</td>
+      <td>Empty Stack:</td>
       <td>{{ tu?.emptyStack }}</td>
     </tr>
     <tr>
-      <td>HasActiveTO:</td>
+      <td>Has Active TO:</td>
       <td>{{ tu?.hasActiveTo }}</td>
     </tr>
     <tr>
-      <td>lastMovementReason:</td>
+      <td>Last Movement Reason:</td>
       <td>{{ tu?.lastDc2AmMovementBookingReason }}</td>
     </tr>
     <tr>
-      <td>lastBookingTime:</td>
+      <td>Last Booking Time:</td>
       <td>{{ tu?.lastLocationBookingTime }}</td>
     </tr>
     <tr>
-      <td>RoutingPoint:</td>
+      <td>Routing Point:</td>
       <td>{{ tu?.routingPoint }}</td>
     </tr>
     <tr>
-      <td>SocOrderInfo:</td>
+      <td>Soc Order Info:</td>
       <td>{{ tu?.socOrderInfo }}</td>
     </tr>
     <tr>
-      <td>SuperTU:</td>
+      <td>Super TU:</td>
       <td>{{ tu?.superTu?.name }}</td>
     </tr>
     <tr>
@@ -91,7 +91,7 @@
                 <td>{{ tu.type.name }}</td>
               </tr>
               <tr>
-                <td>SocId:</td>
+                <td>Soc Id:</td>
                 <td>{{ tu.type.typeSocId }}</td>
               </tr>
             </table>

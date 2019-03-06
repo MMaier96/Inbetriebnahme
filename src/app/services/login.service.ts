@@ -1,5 +1,5 @@
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { GraphQLResponse } from '../objects/graphql-response';
@@ -15,8 +15,8 @@ export class LoginService {
     return this.http.post<GraphQLResponse>('/query', {
       query: `{
         login(
-          name: "` + name + `",
-          password: "` + password + `"
+          name: "${name}",
+          password: "${password}"
         ){
           token
         }

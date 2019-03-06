@@ -1,13 +1,13 @@
 import { TransportOrder } from './../../objects/transport-order';
 import { AppTitleService } from './../../services/app-title.service';
 import { Component, ViewChild, OnInit, AfterContentInit, ViewEncapsulation } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog, MatSnackBar } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { environment } from 'src/environments/environment.prod';
 import { TransportOrderService } from 'src/app/services/transport-order.service';
-import { CreateToActionDialog, CreateTOData } from './actions/createTO/create-to-action';
+import { CreateToActionDialog } from './actions/createTO/create-to-action';
 
 /* Metadata of the Component */
 @Component({
@@ -51,7 +51,8 @@ export class TransportOrderDialog implements OnInit, AfterContentInit {
       private _appTitleService: AppTitleService,
       private route: ActivatedRoute,
       private location: Location,
-      public dialog: MatDialog
+      public dialog: MatDialog,
+      public snackBar: MatSnackBar
     ) { }
 
   /**
@@ -165,6 +166,7 @@ export class TransportOrderDialog implements OnInit, AfterContentInit {
 
   createTO(): void {
     const dialogRef = this.dialog.open(CreateToActionDialog, {
+      width: '80%',
       data: {
         reason: 'WamasWEB Test',
         tuName: 'AnotherTU',
@@ -174,9 +176,16 @@ export class TransportOrderDialog implements OnInit, AfterContentInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       this._toService.createTransportOrder(result).subscribe(data => {
-        console.log(data);
+        if (data === true) {
+          this.snackBar.open(`TransportOrder for ${result.tuName} was created!`, 'Success', {
+            duration: 2000,
+          });
+        } else {
+          this.snackBar.open('TransportOrder couldn\'t be created!', 'Failed', {
+            duration: 2000,
+          });
+        }
       });
     });
   }

@@ -1,7 +1,7 @@
 import { CreateTOData } from './../dialogs/transport-order/actions/createTO/create-to-action';
 import { environment } from './../../environments/environment';
 import { GraphQLService } from './graphql.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -28,12 +28,12 @@ export class TransportOrderService implements GraphQLService<TransportOrder> {
             entries: {
               searchKey: "transportUnit.name",
               operator: EQUALS,
-              values: "%` + filter + `%"
+              values: "%${filter}%"
             }
           },
           paging: {
-            start: ` + environment.defaultPageSize * pageIndex + `,
-            offset:  ` + environment.defaultPageSize + `
+            start: ${environment.defaultPageSize * pageIndex},
+            offset:  ${environment.defaultPageSize}
           }
         ) {
           active
@@ -68,9 +68,9 @@ export class TransportOrderService implements GraphQLService<TransportOrder> {
         transportOrders(
           filter: {
             entries: {
-              searchKey: "` + propertyName + `",
+              searchKey: "${propertyName}",
               operator: EQUALS,
-              values: %` + value + `%
+              values: %${value}%
             }
           }
         ) {
@@ -98,10 +98,10 @@ export class TransportOrderService implements GraphQLService<TransportOrder> {
     return this.http.post<GraphQLResponse>('/query', {
       query: `mutation{
         createTransportOrder(
-          reason: "` + data.reason + `"
-          tuName: "` + data.tuName + `"
-          transportOrderType: ` + data.transportOrderType + `
-          target: "` + data.target + `"
+          reason: "${data.reason}"
+          tuName: "${data.tuName}"
+          transportOrderType: ${data.transportOrderType}
+          target: "${data.target}"
         )
       }`
     }, this.tokenService.getHttpOptions()).pipe(

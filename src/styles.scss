@@ -180,3 +180,15 @@ mat-accordion.action-bar.mat-accordion .mat-expansion-panel:last-of-type {
 .mat-drawer.mat-drawer-side {
     z-index: 1 !important;
 }
+
+td {
+  max-width: 100px !important;
+  overflow: hidden;
+}
+td.cdk-column-expandedDetail{
+  overflow: initial;
+}
+table.details td{
+  width: 160px !important;
+  max-width: 160px !important;
+}

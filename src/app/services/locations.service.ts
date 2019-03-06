@@ -1,6 +1,6 @@
 import { GraphQLService } from './graphql.service';
 import { Location } from './../objects/location';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -27,12 +27,12 @@ export class LocationService implements GraphQLService<Location> {
             entries: {
               searchKey: "name",
               operator: EQUALS,
-              values: "%` + filter + `%"
+              values: "%${filter}%"
             }
           },
           paging: {
-            start: ` + environment.defaultPageSize * pageIndex + `,
-            offset:  ` + environment.defaultPageSize + `
+            start: ${environment.defaultPageSize * pageIndex},
+            offset:  ${environment.defaultPageSize}
           }
         ) {
           name
@@ -63,9 +63,9 @@ export class LocationService implements GraphQLService<Location> {
         locations(
           filter: {
             entries: {
-              searchKey: "` + propertyName + `",
+              searchKey: "${propertyName}",
               operator: EQUALS,
-              values: "%` + value + `%"
+              values: "%${value}%"
             }
           }
         ) {

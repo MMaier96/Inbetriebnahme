@@ -158,8 +158,4 @@ export class TransportUnitDialog implements OnInit, AfterContentInit {
     this.loadData();
     this.paginator.pageIndex = 0;
   }
-
-  loadPage(url){
-    console.log(location.replace(url));
-  }
 }
