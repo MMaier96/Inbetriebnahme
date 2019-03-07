@@ -20,7 +20,7 @@ export class LocationService implements GraphQLService<Location> {
 
   getObjectsForPage(filter: string, pageIndex: number): Observable<Location[]> {
     filter = filter || '';
-    return this.http.post<GraphQLResponse>('http://172.26.88.8:9987/graphql/query', {
+    return this.http.post<GraphQLResponse>('/query', {
       query: `{
         locations(
           filter: {
@@ -48,7 +48,7 @@ export class LocationService implements GraphQLService<Location> {
   }
 
   getObjectsCount(): Observable<number> {
-    return this.http.post<GraphQLResponse>('http://172.26.88.8:9987/graphql/query', {
+    return this.http.post<GraphQLResponse>('/query', {
       query: `{
         locationCount
       }`
@@ -58,7 +58,7 @@ export class LocationService implements GraphQLService<Location> {
   }
 
   getObjectByProperty(propertyName: string, value: string) {
-    return this.http.post<GraphQLResponse>('http://172.26.88.8:9987/graphql/query', {
+    return this.http.post<GraphQLResponse>('/query', {
       query: `{
         locations(
           filter: {

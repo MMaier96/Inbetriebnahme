@@ -20,7 +20,7 @@ export class TransportUnitService implements GraphQLService<TransportUnit> {
 
   getObjectsForPage(filter: string, pageIndex: number): Observable<TransportUnit[]> {
     filter = filter || '';
-    return this.http.post<GraphQLResponse>('http://172.26.88.8:9987/graphql/query', {
+    return this.http.post<GraphQLResponse>('/query', {
       query: `{
         transportUnits(
           filter: {
@@ -50,7 +50,7 @@ export class TransportUnitService implements GraphQLService<TransportUnit> {
   }
 
   getObjectsCount(): Observable<number> {
-    return this.http.post<GraphQLResponse>('http://172.26.88.8:9987/graphql/query', {
+    return this.http.post<GraphQLResponse>('/query', {
       query: `{
         transportUnitCount
       }`
@@ -60,7 +60,7 @@ export class TransportUnitService implements GraphQLService<TransportUnit> {
   }
 
   getObjectByProperty(propertyName: string, value: string): Observable<TransportUnit> {
-    return this.http.post<GraphQLResponse>('http://172.26.88.8:9987/graphql/query', {
+    return this.http.post<GraphQLResponse>('/query', {
       query: `{
         transportUnits(
           filter: {

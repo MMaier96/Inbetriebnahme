@@ -12,7 +12,7 @@ export class LoginService {
   constructor( private http: HttpClient) { }
 
   login(name: string, password: string) {
-    return this.http.post<GraphQLResponse>('http://172.26.88.8:9987/graphql/query', {
+    return this.http.post<GraphQLResponse>('/query', {
       query: `{
         login(
           name: "${name}",

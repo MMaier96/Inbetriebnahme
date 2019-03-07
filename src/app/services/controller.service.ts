@@ -18,7 +18,7 @@ export class ControllerService implements GraphQLService<Controller> {
   ) { }
 
   getObjectsForPage(filter: string, pageIndex: number): Observable<Controller[]> {
-    return this.http.post<GraphQLResponse>('http://172.26.88.8:9987/graphql/query', {
+    return this.http.post<GraphQLResponse>('/query', {
       query: `{
         deviceControllerStates {
           name
