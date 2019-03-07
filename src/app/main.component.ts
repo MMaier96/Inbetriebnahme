@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, AfterContentInit, OnChanges, DoCheck, AfterContentChecked, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, AfterContentInit,  DoCheck, AfterViewChecked } from '@angular/core';
 import { AppTitleService } from './services/app-title.service';
 
 @Component({
@@ -82,7 +82,6 @@ export class MainComponent implements OnDestroy, OnInit, AfterContentInit, DoChe
       });
     }
   }
-
 
   logout() {
     localStorage.removeItem('graphql-token');

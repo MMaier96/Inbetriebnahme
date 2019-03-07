@@ -1,3 +1,4 @@
+import { ControllerDetailsDialog } from './dialogs/controller/details/controller-details.dialog';
 import { CreateToActionDialog } from './dialogs/transport-order/actions/createTO/create-to-action';
 import { LocationsDetailsDialog } from './dialogs/locations/details/locations-details.dialog';
 import { LoginService } from './services/login.service';
@@ -62,7 +63,8 @@ import { FormsModule } from '@angular/forms';
     ServiceStatusColorPipe,
     ExternalDialogLink,
     TruncPipe,
-    CreateToActionDialog
+    CreateToActionDialog,
+    ControllerDetailsDialog
   ],
   imports: [
     BrowserModule,

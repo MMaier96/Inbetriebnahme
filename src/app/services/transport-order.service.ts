@@ -21,7 +21,7 @@ export class TransportOrderService implements GraphQLService<TransportOrder> {
 
   getObjectsForPage(filter: string, pageIndex: number): Observable<TransportOrder[]> {
     filter = filter || '';
-    return this.http.post<GraphQLResponse>('/query', {
+    return this.http.post<GraphQLResponse>('http://172.26.88.8:9987/graphql/query', {
       query: `{
         transportOrders (
           filter: {
@@ -53,7 +53,7 @@ export class TransportOrderService implements GraphQLService<TransportOrder> {
   }
 
   getObjectsCount(): Observable<number> {
-    return this.http.post<GraphQLResponse>('/query', {
+    return this.http.post<GraphQLResponse>('http://172.26.88.8:9987/graphql/query', {
       query: `{
         transportOrderCount
       }`
@@ -63,7 +63,7 @@ export class TransportOrderService implements GraphQLService<TransportOrder> {
   }
 
   getObjectByProperty(propertyName: string, value: string): Observable<TransportOrder> {
-    return this.http.post<GraphQLResponse>('/query', {
+    return this.http.post<GraphQLResponse>('http://172.26.88.8:9987/graphql/query', {
       query: `{
         transportOrders(
           filter: {
@@ -95,7 +95,7 @@ export class TransportOrderService implements GraphQLService<TransportOrder> {
 
 
   createTransportOrder(data: CreateTOData) {
-    return this.http.post<GraphQLResponse>('/query', {
+    return this.http.post<GraphQLResponse>('http://172.26.88.8:9987/graphql/query', {
       query: `mutation{
         createTransportOrder(
           reason: "${data.reason}"

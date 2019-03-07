@@ -17,7 +17,7 @@ export class ServicesService {
   ) { }
 
   getAllServices(): Observable<Service[]> {
-    return this.http.post<GraphQLResponse>('/query', {
+    return this.http.post<GraphQLResponse>('http://172.26.88.8:9987/graphql/query', {
       query: `{
         serviceStates {
           daemonState
